@@ -12,3 +12,8 @@ import Login from './components/Login.vue';
 
 
 </script>
+<style>
+.ion-button{
+--padding:10px;
+}
+</style>

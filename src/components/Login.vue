@@ -3,7 +3,7 @@
 <h4>Farm Care</h4>
 <p>You are welcome</p>
 
-
+<form>
 
 <ion-list>
 <ion-item>
@@ -15,14 +15,17 @@
 </ion-item>
 
 <ion-item lines="none">
-    <ion-button expand="block">Login</ion-button>
+<ion-button expand="block" style="width:100%;margin-top:20px;" class="ion-button" size="default" type="submit">Login</ion-button>
 </ion-item>
 </ion-list>
-
+</form>
 </IonContent>
 </template>
 <script setup lang="ts">
 import { IonContent, IonInput, IonItem, IonList,IonButton  } from '@ionic/vue';
+import { ref } from 'vue';
+
+
 
 
 
