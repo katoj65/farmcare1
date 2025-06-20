@@ -16,7 +16,7 @@ export default defineConfig({
       manifest: {
         name: 'My PWA App',
         short_name: 'PWA App',
-        start_url: '/',
+        start_url: 'https://katoj65.github.io/farmcare1/',
         display: 'standalone',
         background_color: '#ffffff',
         theme_color: '#3880ff',
