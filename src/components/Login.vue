@@ -21,7 +21,7 @@
 
 </IonContent>
 </template>
-<script setup>
+<script setup lang="ts">
 import { IonContent, IonInput, IonItem, IonList,IonButton  } from '@ionic/vue';
 
 
