@@ -1,8 +1,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router';
-
 import { IonicVue } from '@ionic/vue';
+import {store} from '@/store/Index'
 
 
 
@@ -38,6 +38,7 @@ import './theme/variables.css';
 
 const app = createApp(App)
   .use(IonicVue)
+  .use(store)
   .use(router);
 
 router.isReady().then(() => {

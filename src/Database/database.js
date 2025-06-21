@@ -1,0 +1,6 @@
+//URL: https://twigtxiiurgxaqokalku.supabase.co
+//Key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR3aWd0eGlpdXJneGFxb2thbGt1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA0ODc0MTMsImV4cCI6MjA2NjA2MzQxM30.y1z52sWAUQ7Kxb4Pf7YTDmoCFUvFyeDZZRHROXCQjlc
+const url='https://twigtxiiurgxaqokalku.supabase.co';
+const key='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR3aWd0eGlpdXJneGFxb2thbGt1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA0ODc0MTMsImV4cCI6MjA2NjA2MzQxM30.y1z52sWAUQ7Kxb4Pf7YTDmoCFUvFyeDZZRHROXCQjlc';
+import { createClient } from '@supabase/supabase-js';
+export const db = createClient(url, key);
