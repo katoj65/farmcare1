@@ -7,6 +7,13 @@
 
 <ion-header>
 <ion-toolbar>
+
+<ion-buttons slot="start" v-if="back!=null">
+<ion-back-button @click="router.push(back)"></ion-back-button>
+</ion-buttons>
+
+
+
 <ion-title>{{ title!=null?title:'FarmCare' }} </ion-title>
 <ion-buttons slot="end">
 <ion-button @click="router.push('/search')"> <ion-icon slot="end" :icon="search" color="dark"></ion-icon> </ion-button>
@@ -27,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent,IonButton, IonButtons, IonIcon, } from '@ionic/vue';
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent,IonButton, IonButtons, IonIcon,IonBackButton } from '@ionic/vue';
 import {store} from '@/store/Index';
 import { useRouter } from 'vue-router';
 import { search, personCircle } from 'ionicons/icons';
@@ -35,6 +42,7 @@ import { search, personCircle } from 'ionicons/icons';
 
 const props=defineProps({
 title:String,
+back:String
 
 });
 

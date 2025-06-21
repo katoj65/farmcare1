@@ -13,7 +13,7 @@ import { useRouter } from 'vue-router';
 
 </script>
 <template>
-<app-layout title="Farm">
+<app-layout title="Farm" back="/">
 
 <ion-item detail="true" v-for="(e,key) in 30" :key="key">
 <ion-label>
