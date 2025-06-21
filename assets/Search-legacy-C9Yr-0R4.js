@@ -1,0 +1,1 @@
+System.register(["./AppLayout.vue_vue_type_script_setup_true_lang-legacy-DI7cPisO.js","./index-legacy-CgmNzqNK.js"],function(e,t){"use strict";var u,_,r,s,a,c;return{setters:[e=>{u=e._},e=>{_=e.d,r=e.c,s=e.w,a=e.x,c=e.o}],execute:function(){e("default",_({__name:"Search",setup:e=>(e,t)=>(c(),r(u,{title:"Search"},{default:s(()=>t[0]||(t[0]=[a(" hello ")])),_:1,__:[0]}))}))}}});
