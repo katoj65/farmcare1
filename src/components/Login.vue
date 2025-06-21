@@ -63,8 +63,8 @@ password:form.password,
 }).then((response)=>{
 //console.log(response.error);
 if(response.error==null){
-store.state.user=response.data.user;
-console.log(store.state.user);
+store.state.user=response.data.user.email;
+
 }else{
 message.error='Invalid email or password';
 }

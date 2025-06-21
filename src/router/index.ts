@@ -28,7 +28,19 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/Tab3Page.vue')
       }
     ]
+  },
+  {
+    path:'/profile/create',
+    component:()=>import('@/views/CreateProfile.vue'),
+    name:'create profile'
   }
+
+
+
+
+
+
+  
 ]
 
 const router = createRouter({
