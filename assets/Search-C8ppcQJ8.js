@@ -1,1 +1,0 @@
-import{_ as t}from"./AppLayout.vue_vue_type_script_setup_true_lang-Etb9GArK.js";import{d as a,c as o,w as r,x as s,o as _}from"./index-CX_BmNdE.js";const f=a({__name:"Search",setup(n){return(c,e)=>(_(),o(t,{title:"Search"},{default:r(()=>e[0]||(e[0]=[s(" hello ")])),_:1,__:[0]}))}});export{f as default};
