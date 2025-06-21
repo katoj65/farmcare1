@@ -2,13 +2,13 @@
 <ion-page>
 <ion-header>
 <ion-toolbar>
-<ion-title>{{ title!=''?title:'FarmCare' }} </ion-title>
+<ion-title>{{ title!=null?title:'FarmCare' }} </ion-title>
 </ion-toolbar>
 </ion-header>
 <ion-content :fullscreen="true">
 <ion-header collapse="condense">
 <ion-toolbar>
-<ion-title size="large">{{ title!=''?title:'FarmCare' }} </ion-title>
+<ion-title size="large">{{ title!=null?title:'FarmCare' }} </ion-title>
 </ion-toolbar>
 </ion-header>
 <slot></slot>
