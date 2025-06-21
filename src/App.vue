@@ -22,8 +22,8 @@ import {db} from '@/Database/database';
 onMounted(()=>{
 db.auth.getSession().then((response)=>{
 if(response.data.session!=null){
-//store.state.user=response.data.session.user.email;
-console.log(store.state.user);
+store.state.user=response.data.session.user.email;
+// console.log(store.state.user);
 }else{
 store.state.user=null;
 }

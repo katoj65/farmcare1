@@ -33,6 +33,8 @@ import { logoIonic } from 'ionicons/icons';
 import { reactive } from 'vue';
 import {store} from '@/store/Index';
 import {db} from '@/Database/database';
+import { useRouter } from 'vue-router';
+
 
 const form=reactive({
 email:'katoj65@gmail.com',
@@ -51,7 +53,7 @@ success:'',
 
 
 
-
+const router = useRouter();
 const submit =()=>{
 if(form.email=='' || form.password==''){
 message.error='Fill the email address and password';
@@ -64,6 +66,8 @@ password:form.password,
 //console.log(response.error);
 if(response.error==null){
 store.state.user=response.data.user.email;
+router.push('/profile/create');
+
 
 }else{
 message.error='Invalid email or password';

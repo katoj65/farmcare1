@@ -33,6 +33,11 @@ const routes: Array<RouteRecordRaw> = [
     path:'/profile/create',
     component:()=>import('@/views/CreateProfile.vue'),
     name:'create profile'
+  },
+  {
+    path:'/profile',
+    component:()=>import('@/views/Profile.vue'),
+    name:'profile'
   }
 
 
@@ -40,7 +45,7 @@ const routes: Array<RouteRecordRaw> = [
 
 
 
-  
+
 ]
 
 const router = createRouter({
