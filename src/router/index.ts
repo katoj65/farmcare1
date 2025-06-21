@@ -49,6 +49,17 @@ name:'farm'
   path:'/search',
   component:()=>import('@/views/Search.vue'),
   name:'search'
+},
+{
+path:'/farm/create',
+component:()=>import('@/views/CreateFarm.vue'),
+name:'create farm'
+},
+{
+  path:'/farm/show/:id',
+  component:()=>import('@/views/FarmShow.vue'),
+  name:'show farm'
+
 }
 
 
