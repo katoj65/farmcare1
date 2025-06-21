@@ -3,6 +3,12 @@ import AppLayout from '@/components/AppLayout.vue';
 import {db} from '@/Database/database';
 import { IonItem, IonLabel,  IonFab, IonFabButton, IonIcon } from '@ionic/vue';
 import { caretForwardOutline, add } from 'ionicons/icons';
+import { useRouter } from 'vue-router';
+
+
+
+
+
 
 
 </script>
@@ -27,7 +33,7 @@ Kampala - Uganda
 
 
 <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button>
+    <ion-fab-button color="dark">
       <ion-icon :icon="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

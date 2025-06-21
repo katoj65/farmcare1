@@ -44,6 +44,11 @@ path:'/farm',
 component:()=>import('@/views/Farm.vue'),
 name:'farm'
 
+},
+{
+  path:'/search',
+  component:()=>import('@/views/Search.vue'),
+  name:'search'
 }
 
 

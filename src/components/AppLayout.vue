@@ -1,14 +1,24 @@
 <template>
 <ion-page>
+
+
+
+
+
 <ion-header>
 <ion-toolbar>
 <ion-title>{{ title!=null?title:'FarmCare' }} </ion-title>
+<ion-buttons slot="end">
+<ion-button @click="router.push('/search')"> <ion-icon slot="end" :icon="search" color="dark"></ion-icon> </ion-button>
+<ion-button @click="router.push('/profile')"><ion-icon slot="end" :icon="personCircle" color="dark"></ion-icon> </ion-button>
+</ion-buttons>
 </ion-toolbar>
 </ion-header>
+
 <ion-content :fullscreen="true">
 <ion-header collapse="condense">
 <ion-toolbar>
-<ion-title size="large">{{ title!=null?title:'FarmCare' }} </ion-title>
+<ion-title>{{ title!=null?title:'FarmCare' }} </ion-title>
 </ion-toolbar>
 </ion-header>
 <slot></slot>
@@ -17,11 +27,23 @@
 </template>
 
 <script setup lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent,IonButton, IonButtons, IonIcon, } from '@ionic/vue';
 import {store} from '@/store/Index';
+import { useRouter } from 'vue-router';
+import { search, personCircle } from 'ionicons/icons';
+
+
 const props=defineProps({
 title:String,
 
 });
+
+const router=useRouter();
+
+
+
+
+
+
 
 </script>
