@@ -70,6 +70,13 @@ name:'create farm'
   path:'/animal/add/:id',
   component:()=>import('@/views/FarmAnimalCreate.vue'),
   name:'add farm animal'
+},
+{
+path:'/animal/:id',
+component:()=>import('@/views/AnimalShow.vue'),
+name:'animal details'
+
+
 }
 
 
