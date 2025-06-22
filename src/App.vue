@@ -38,4 +38,5 @@ store.state.user=null;
 .ion-button{
 --padding:10px;
 }
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 </style>
