@@ -9,7 +9,7 @@
 import { IonApp, IonRouterOutlet } from '@ionic/vue';
 import Login from './components/Login.vue';
 import {store} from '@/store/Index';
-import { onMounted } from 'vue';
+import { onMounted, onBeforeMount } from 'vue';
 import {db} from '@/Database/database';
 
 
@@ -19,7 +19,7 @@ import {db} from '@/Database/database';
 
 
 
-onMounted(()=>{
+onBeforeMount(()=>{
 db.auth.getSession().then((response)=>{
 if(response.data.session!=null){
 store.state.user=response.data.session.user.email;
@@ -30,6 +30,14 @@ store.state.user=null;
 }).catch((error)=>{console.log(error)});
 
 });
+
+
+
+
+
+
+
+
 
 
 
