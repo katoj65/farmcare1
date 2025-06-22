@@ -60,6 +60,16 @@ name:'create farm'
   component:()=>import('@/views/FarmShow.vue'),
   name:'show farm'
 
+},
+{
+  path:'/farm/add/:id',
+  component:()=>import('@/views/FarmAddItems.vue'),
+  name:'farm add items'
+},
+{
+  path:'/animal/add/:id',
+  component:()=>import('@/views/FarmAnimalCreate.vue'),
+  name:'add farm animal'
 }
 
 
