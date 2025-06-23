@@ -1,25 +1,27 @@
 <template>
 <app-layout title="Animal details" :back="row.back">
 <div v-if="row.animal!=''">
-<ion-card style="box-shadow:none;border:solid thin #e5e8e8">
-<ion-card-header color="light">
-<ion-card-title style="text-transform:capitalize">{{ row.animal.name }} </ion-card-title>
-<ion-card-subtitle style="">
-<!-- {{ row.animal.farm.name }} farm -->
-</ion-card-subtitle>
-</ion-card-header>
-<ion-card-content>
-
 <ion-list>
+
+<ion-list-header color="light">
+<ion-label>
+<h4 style="font-size:18px;font-weight:bold;text-transform:capitalize"> {{ row.animal.name }}</h4>
+</ion-label>
+<ion-button color="dark">
+<ion-icon aria-hidden="true" :icon="ellipsisHorizontalCircleSharp" /></ion-button>
+</ion-list-header>
+
+
+
 <ion-item lines="none">
 <ion-label>Gender</ion-label>
-<ion-note color="medium" style="font-size:17px;">
+<ion-note color="medium" style="font-size:15px;">
 {{ row.animal.gender }}
 </ion-note>
 </ion-item>
 <ion-item lines="none">
 <ion-label>Tag</ion-label>
-<ion-note color="medium" style="font-size:17px;">
+<ion-note color="medium" style="font-size:15px;">
 {{ row.animal.tag }}
 </ion-note>
 </ion-item>
@@ -31,27 +33,62 @@
 </ion-item>
 <ion-item lines="none">
 <ion-label>Weight</ion-label>
-<ion-note color="medium" style="font-size:17px;">
+<ion-note color="medium" style="font-size:15px;">
 {{ row.animal.weight }} Kgs
 </ion-note>
 </ion-item>
 <ion-item lines="none">
 <ion-label>Origin</ion-label>
-<ion-note color="medium" style="text-transform:capitalize;font-size:17px;">
+<ion-note color="medium" style="text-transform:capitalize;font-size:15px;">
 {{ row.animal.origin }}
 </ion-note>
 </ion-item>
 <ion-item lines="none">
 <ion-label>Farm</ion-label>
-<ion-note color="medium" style="text-transform:capitalize;font-size:17px;">
+<ion-note color="medium" style="text-transform:capitalize;font-size:15px;">
 {{ row.animal.farm.name }}
 </ion-note>
 </ion-item>
+
+<ion-list-header color="light">
+<ion-label>Animal Health Report</ion-label>
+</ion-list-header>
+
+
+
+<ion-item lines="none">
+<ion-label>Immunisation</ion-label>
+<ion-note color="medium" style="font-size:15px;">
+None
+</ion-note>
+</ion-item>
+
+
+<ion-item lines="none">
+<ion-label>Disease</ion-label>
+<ion-note color="medium" style="font-size:15px;">
+None
+</ion-note>
+</ion-item>
+
+
+<ion-item lines="none">
+<ion-label>Gestation</ion-label>
+<ion-note color="medium" style="font-size:15px;">
+None
+</ion-note>
+</ion-item>
+
+
+
+
+
+
+
+
+
+
 </ion-list>
-</ion-card-content>
-</ion-card>
-
-
 
 
 
@@ -69,7 +106,8 @@ import AppLayout from '@/components/AppLayout.vue';
 import { useRoute } from 'vue-router';
 import { reactive, onMounted } from 'vue';
 import {db} from '@/Database/database';
-import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle,IonItem, IonLabel, IonList, IonNote  } from '@ionic/vue';
+import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle,IonItem, IonLabel, IonList, IonNote,IonListHeader, IonIcon   } from '@ionic/vue';
+import { ellipsisHorizontalCircleSharp } from 'ionicons/icons';
 
 const row=reactive({
 animal:'',
