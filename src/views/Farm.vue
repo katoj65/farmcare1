@@ -2,7 +2,7 @@
 import AppLayout from '@/components/AppLayout.vue';
 import {db} from '@/Database/database';
 import { IonItem, IonLabel,  IonFab, IonFabButton, IonIcon } from '@ionic/vue';
-import { caretForwardOutline, add } from 'ionicons/icons';
+import { caretForwardOutline, add,leaf } from 'ionicons/icons';
 import { useRouter } from 'vue-router';
 import { reactive,onMounted } from 'vue';
 import {store} from '@/store/Index';
@@ -44,8 +44,9 @@ data.farm=response.data;
 <app-layout title="Farm" back="/">
 
 <ion-item detail="true" v-for="(f,key) in data.farm" :key="key" @click="router.push('/farm/show/'+f.id)">
+<ion-icon :icon="leaf" slot="start"></ion-icon>
 <ion-label>
-<h3>
+<h3 style="font-weight:bold;">
 {{ f.name }}
 </h3>
 <p>

@@ -34,7 +34,7 @@ console.log(response.error);
 
 </script>
 <template>
-<app-layout title="Farm worker">
+<app-layout title="Farm worker" back="/">
 <div v-for="(w,key) in row.worker" :key="key">
 
 <ion-list>

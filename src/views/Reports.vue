@@ -49,13 +49,13 @@ return measure;
 </script>
 
 <template>
-<app-layout title="Employees" back="/reports">
+<app-layout title="Employees" back="/">
 <div style="padding-bottom:100px;">
 <ion-list>
 
 <ion-item  detail="true" v-for="(a,key) in row.animal" :key="key" @click="router.push('/animal/'+a.animal.id)">
-<ion-icon :icon="clipboardOutline"></ion-icon>
-<ion-label style="padding-left:10px;">
+<ion-icon :icon="clipboardOutline" slot="start"></ion-icon>
+<ion-label>
 <h3 style="text-transform:capitalize;font-weight:bold;font-size:14px;">{{ a.animal.name }} </h3>
 <p style="text-transform:capitalize;">
 {{ a.type }} : {{ a.description }} {{ measurements(a.type) }}
