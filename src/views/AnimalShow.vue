@@ -1,6 +1,6 @@
 <template>
 <app-layout title="Animal details" :back="row.back">
-<div v-if="row.animal!=''">
+<div v-if="row.animal!=''" style="padding-bottom:100px;">
 <ion-list>
 
 <ion-list-header color="light">
@@ -50,6 +50,13 @@
 </ion-note>
 </ion-item>
 
+<ion-item lines="none">
+    <ion-label>Date added</ion-label>
+    <ion-note color="medium" style="text-transform:capitalize;font-size:10px;">
+    {{ row.animal.created_at }}
+    </ion-note>
+    </ion-item>
+
 <ion-list-header color="light">
 <ion-label>Animal Health Report</ion-label>
 </ion-list-header>
@@ -80,7 +87,12 @@ None
 </ion-item>
 
 
-
+    <ion-item lines="none">
+    <ion-label>Feeding</ion-label>
+    <ion-note color="medium" style="font-size:15px;">
+    None
+    </ion-note>
+    </ion-item>
 
 
 
@@ -99,15 +111,73 @@ None
 
 
 </div>
+
+
+
+
+
+
+
+<ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button color="dark" @click="modal(true)">
+      <ion-icon :icon="add" ></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+
+
+
+
+
+
+
+
+
+
+<ion-modal :is-open="isOpen">
+<ion-header>
+<ion-toolbar>
+<ion-title>Add animal report</ion-title>
+<ion-buttons slot="end">
+<ion-button @click="modal(false)">Close</ion-button>
+</ion-buttons>
+</ion-toolbar>
+</ion-header>
+<ion-content>
+<ion-list>
+<ion-list-header color="light">
+<ion-label>
+<h4 style="font-size:18px;font-weight:bold;text-transform:capitalize"> {{ row.animal.name }}</h4>
+</ion-label>
+</ion-list-header>
+</ion-list>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ion-content>
+</ion-modal>
 </app-layout>
 </template>
 <script setup>
 import AppLayout from '@/components/AppLayout.vue';
 import { useRoute } from 'vue-router';
-import { reactive, onMounted } from 'vue';
+import { reactive, onMounted, computed,ref } from 'vue';
 import {db} from '@/Database/database';
-import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle,IonItem, IonLabel, IonList, IonNote,IonListHeader, IonIcon   } from '@ionic/vue';
-import { ellipsisHorizontalCircleSharp } from 'ionicons/icons';
+import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle,IonItem, IonLabel, IonList, IonNote,IonListHeader, IonIcon, IonButton, IonFab, IonFabButton,
+    IonButtons,  IonModal, IonHeader, IonToolbar, IonContent, IonTitle    } from '@ionic/vue';
+import { ellipsisHorizontalCircleSharp,add } from 'ionicons/icons';
 
 const row=reactive({
 animal:'',
@@ -135,10 +205,18 @@ console.log(response.error);
 })
 .catch((error)=>{console.log(error)});
 
-})
+});
 
 
+const dateFormat=computed((date)=>{
+let d=date.split('-');
+return d[0]+'-'+d[1]+'-'+d[2];
+});
 
+const isOpen = ref(false);
+const modal=(state)=>{
+isOpen.value=state;
+}
 
 
 
