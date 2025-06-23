@@ -51,11 +51,11 @@
 </ion-item>
 
 <ion-item lines="none">
-    <ion-label>Date added</ion-label>
-    <ion-note color="medium" style="text-transform:capitalize;font-size:10px;">
-    {{ row.animal.created_at }}
-    </ion-note>
-    </ion-item>
+<ion-label>Date added</ion-label>
+<ion-note color="medium" style="text-transform:capitalize;font-size:10px;">
+{{ row.animal.created_at }}
+</ion-note>
+</ion-item>
 
 <ion-list-header color="light">
 <ion-label>Animal Health Report</ion-label>
@@ -87,12 +87,12 @@ None
 </ion-item>
 
 
-    <ion-item lines="none">
-    <ion-label>Feeding</ion-label>
-    <ion-note color="medium" style="font-size:15px;">
-    None
-    </ion-note>
-    </ion-item>
+<ion-item lines="none">
+<ion-label>Feeding</ion-label>
+<ion-note color="medium" style="font-size:15px;">
+None
+</ion-note>
+</ion-item>
 
 
 
@@ -119,10 +119,10 @@ None
 
 
 <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button color="dark" @click="modal(true)">
-      <ion-icon :icon="add" ></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+<ion-fab-button color="dark" @click="modal(true)">
+<ion-icon :icon="add" ></ion-icon>
+</ion-fab-button>
+</ion-fab>
 
 
 
@@ -135,7 +135,7 @@ None
 
 
 
-<ion-modal :is-open="isOpen">
+<ion-modal :is-open="isOpen" v-if="route.name=='animal details'">
 <ion-header>
 <ion-toolbar>
 <ion-title>Add animal report</ion-title>
@@ -155,10 +155,28 @@ None
 
 
 
+<form style="padding:15px;" @submit.prevent="submit">
+<ion-list style="border:solid thin #e5e8e8;border-radius:10px;padding-bottom:15px; ">
+<ion-item>
+<ion-select label="Report" placeholder="Select option">
+<ion-select-option value="animal temperature">Animal Temperature</ion-select-option>
+<ion-select-option value="heartbeat">Heartbeat</ion-select-option>
+<ion-select-option value="environmental temperature">Environmental temperature</ion-select-option>
+</ion-select>
+</ion-item>
+
+<ion-item>
+<ion-input label="Measurements" placeholder="Enter readings" type="number"></ion-input>
+</ion-item>
 
 
 
+<ion-item lines="none">
+<ion-button expand="block" style="width:100%;margin-top:20px;" class="ion-button" size="default" type="submit">Save</ion-button>
+</ion-item>
+</ion-list>
 
+</form>
 
 
 
@@ -176,12 +194,12 @@ import { useRoute } from 'vue-router';
 import { reactive, onMounted, computed,ref } from 'vue';
 import {db} from '@/Database/database';
 import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle,IonItem, IonLabel, IonList, IonNote,IonListHeader, IonIcon, IonButton, IonFab, IonFabButton,
-    IonButtons,  IonModal, IonHeader, IonToolbar, IonContent, IonTitle    } from '@ionic/vue';
+IonButtons,IonModal, IonHeader, IonToolbar, IonContent, IonTitle,IonInput, IonSelect,IonSelectOption   } from '@ionic/vue';
 import { ellipsisHorizontalCircleSharp,add } from 'ionicons/icons';
 
 const row=reactive({
 animal:'',
-back:''
+back:'',
 });
 
 
@@ -220,10 +238,21 @@ isOpen.value=state;
 
 
 
+const form=reactive({
+type:'',
+qtty:''
+});
+
+const message=reactive({
+error:null,
+});
 
 
 
 
+const submit=()=>{
+alert();
+}
 
 
 
