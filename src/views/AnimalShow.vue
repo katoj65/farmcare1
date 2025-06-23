@@ -3,13 +3,26 @@
 <div v-if="row.animal!=''" style="padding-bottom:100px;">
 <ion-list>
 
-<ion-list-header color="light">
-<ion-label>
-<h4 style="font-size:18px;font-weight:bold;text-transform:capitalize"> {{ row.animal.name }}</h4>
+
+
+
+
+
+<ion-item lines="none" color="light">
+<ion-avatar>
+<img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+</ion-avatar>
+<ion-label style="font-size:18px;font-weight:bold;text-transform:capitalize;margin-left:10px;">
+{{ row.animal.name }}
 </ion-label>
-<ion-button color="dark">
-<ion-icon aria-hidden="true" :icon="ellipsisHorizontalCircleSharp" /></ion-button>
-</ion-list-header>
+<ion-note color="medium" style="font-size:15px;">
+<ion-button color="light">
+<ion-icon aria-hidden="true" :icon="ellipsisHorizontalCircleSharp" />
+</ion-button>
+
+</ion-note>
+</ion-item>
+
 
 
 
@@ -59,10 +72,10 @@
 
 <ion-list-header color="light">
 <ion-label style="font-weight:bold;">
-    <span class="material-icons">assignment</span>
+
     Animal Health Report</ion-label>
-    <ion-button v-if="row.report.length>0">
-        <span class="material-icons" color="dark">share</span>
+    <ion-button v-if="row.report.length>0" color="dark">
+        <span class="material-icons" >share</span>
     </ion-button>
 </ion-list-header>
 
@@ -174,7 +187,7 @@ import { useRoute } from 'vue-router';
 import { reactive, onMounted, computed,ref } from 'vue';
 import {db} from '@/Database/database';
 import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle,IonItem, IonLabel, IonList, IonNote,IonListHeader, IonIcon, IonButton, IonFab, IonFabButton,
-IonButtons,IonModal, IonHeader, IonToolbar, IonContent, IonTitle,IonInput, IonSelect,IonSelectOption,  IonBadge   } from '@ionic/vue';
+IonButtons,IonModal, IonHeader, IonToolbar, IonContent, IonTitle,IonInput, IonSelect,IonSelectOption, IonBadge, IonAvatar   } from '@ionic/vue';
 import { ellipsisHorizontalCircleSharp,add } from 'ionicons/icons';
 
 const row=reactive({

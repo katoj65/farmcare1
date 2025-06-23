@@ -43,10 +43,7 @@ data.farm=response.data;
 <template>
 <app-layout title="Farm" back="/">
 
-
-
-
-<ion-item detail="true" v-for="(f,key) in data.farm" :key="key" @click="router.push('/farm/show/'+f)">
+<ion-item detail="true" v-for="(f,key) in data.farm" :key="key" @click="router.push('/farm/show/'+f.id)">
 <ion-label>
 <h3>
 {{ f.name }}
