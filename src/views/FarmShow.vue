@@ -1,7 +1,10 @@
 <template>
 <farm-layout>
 
-
+<ion-list>
+<ion-list-header color="light">
+<ion-label>Farm animals </ion-label>
+</ion-list-header>
 <ion-item detail="true" v-for="(a,key) in row.animal" :key="key" @click="router.push('/animal/'+a.id)">
 <ion-avatar slot="start">
 <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="avatar" />
@@ -14,12 +17,13 @@
 </p>
 </ion-label>
 </ion-item>
+</ion-list>
 
 </farm-layout>
 </template>
 <script setup >
 import FarmLayout from '@/components/FarmLayout.vue';
-import {IonItem, IonLabel,IonFab, IonFabButton, IonFabList,IonIcon ,IonAvatar,IonActionSheet} from '@ionic/vue';
+import {IonItem, IonLabel,IonFab, IonFabButton, IonFabList,IonIcon ,IonAvatar,IonList, IonListHeader} from '@ionic/vue';
 import { reactive, onMounted } from 'vue';
 import {db} from '@/Database/database';
 import { useRoute, useRouter } from 'vue-router';

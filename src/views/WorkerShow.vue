@@ -4,8 +4,7 @@ import { reactive,onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import {db} from '@/Database/database';
 import { ellipsisHorizontalCircleSharp, } from 'ionicons/icons';
-
-import { IonButton, IonItem, IonLabel, IonList, IonListHeader, IonNote, IonIcon } from '@ionic/vue';
+import { IonButton, IonItem, IonLabel, IonList, IonListHeader, IonNote, IonIcon, IonAvatar, } from '@ionic/vue';
 
 const row=reactive({
 worker:''
@@ -37,11 +36,18 @@ console.log(response.error);
 <app-layout title="Farm worker">
 <div v-for="(w,key) in row.worker" :key="key">
 
-<ion-list style="margin:10px;border:solid thin #e5e8e8;border-radius:10px;">
-<ion-list-header color="light">
-<ion-label>{{ w.firstname }} {{ w.lastname }} </ion-label>
-<ion-button color="dark"><ion-icon :icon="ellipsisHorizontalCircleSharp" ></ion-icon></ion-button>
-</ion-list-header>
+<ion-list >
+<ion-item lines="none" color="light" inset="none">
+<ion-avatar aria-hidden="true" slot="start">
+<img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+</ion-avatar>
+<ion-label style="font-weight:bolder;">{{ w.firstname }} {{ w.lastname }} </ion-label>
+<ion-note color="medium" style="text-transform:capitalize;font-size:15px;">
+    <ion-button color="light"><ion-icon :icon="ellipsisHorizontalCircleSharp" ></ion-icon></ion-button>
+</ion-note>
+</ion-item>
+
+
 <ion-item lines="none">
 <ion-label>Gender</ion-label>
 <ion-note color="medium" style="text-transform:capitalize;font-size:15px;">
@@ -75,7 +81,7 @@ console.log(response.error);
 {{ w.farm.name }}
 </ion-note>
 </ion-item>
-<ion-item lines="none">
+<ion-item>
 <ion-label>Farm Size </ion-label>
 <ion-note color="medium" style="text-transform:capitalize;font-size:15px;">
 {{ w.farm.size }}

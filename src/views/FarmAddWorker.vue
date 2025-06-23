@@ -30,7 +30,7 @@ Add farm worker
 </ion-item>
 
 <ion-item>
-<ion-input label="Tag" placeholder="Enter age" v-model="form.age" type="number"></ion-input>
+<ion-input label="Age" placeholder="Enter age" v-model="form.age" type="number"></ion-input>
 </ion-item>
 
 <ion-item>
