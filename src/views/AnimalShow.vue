@@ -64,7 +64,7 @@
 
 
 
-<ion-item v-for="(r,key) in row.report" :key="key">
+<ion-item v-for="(r,key) in row.report" :key="key" color="light" style="margin-top:3px;" lines="none">
 <ion-label style="text-transform:capitalize">
 {{ r.type }}
 </ion-label>
@@ -195,8 +195,9 @@ row.back='/farm/show/'+element.farm.id;
 
 //get animal reports
 db.from('animal_report')
-.select("*")
+.select("type,description")
 .eq('animal_id',row.animal.id)
+.limit(3)
 .then((response)=>{
 if(response.error==null){
 row.report=response.data;
