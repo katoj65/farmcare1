@@ -24,6 +24,7 @@
 <script setup>
 import FarmLayout from '@/components/FarmLayout.vue';
 import {IonItem, IonLabel,IonFab, IonFabButton, IonFabList,IonIcon ,IonAvatar,IonList, IonListHeader} from '@ionic/vue';
+import { ellipsisHorizontalCircleSharp,add } from 'ionicons/icons';
 import { reactive, onMounted } from 'vue';
 import {db} from '@/Database/database';
 import { useRoute, useRouter } from 'vue-router';

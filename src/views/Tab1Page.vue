@@ -10,8 +10,8 @@ import { logoIonic, leaf, people,documentText,briefcase,fitness,bug } from 'ioni
 
 const menu=[
 {title:'Farm',icon:leaf,url:'/farm'},
-{title:'Employees',icon:people,url:'/'},
-{title:'Reports',icon:documentText,url:'/'},
+{title:'Employees',icon:people,url:'/employees'},
+{title:'Reports',icon:documentText,url:'/reports'},
 {title:'Inventory',icon:briefcase,url:'/'},
 {title:'Veterinary',icon:fitness,url:'/'},
 {title:'Diseases',icon:bug,url:'/'},

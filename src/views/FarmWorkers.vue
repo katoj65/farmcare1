@@ -8,7 +8,7 @@
 
 
 
-<ion-item lines="none" detail="true" v-for="(a,key) in row.animal" :key="key" @click="router.push('/animal/'+a.id)" style="border:solid thin #e5e8e8;margin:5px;border-radius:10px;">
+<ion-item lines="none" detail="true" v-for="(a,key) in row.animal" :key="key" @click="router.push('/worker/show/'+a.id)" style="border:solid thin #e5e8e8;margin:5px;border-radius:10px;">
 <ion-avatar slot="start">
 <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="avatar" />
 </ion-avatar>
