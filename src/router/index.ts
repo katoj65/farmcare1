@@ -75,7 +75,17 @@ name:'add farm animal'
 path:'/animal/:id',
 component:()=>import('@/views/AnimalShow.vue'),
 name:'animal details'
-}
+},
+{
+path:'/worker/add/:id',
+component:()=>import('@/views/FarmAddWorker.vue'),
+name:'farm add worker'
+},
+{
+path:'/worker/show/:id',
+component:()=>import('@/views/WorkerShow.vue'),
+name:'farm worker'
+},
 
 
 

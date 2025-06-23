@@ -58,7 +58,12 @@
 </ion-item>
 
 <ion-list-header color="light">
-<ion-label>Animal Health Report</ion-label>
+<ion-label style="font-weight:bold;">
+    <span class="material-icons">assignment</span>
+    Animal Health Report</ion-label>
+    <ion-button v-if="row.report.length>0">
+        <span class="material-icons" color="dark">share</span>
+    </ion-button>
 </ion-list-header>
 
 
@@ -118,10 +123,11 @@
 <ion-list-header color="light">
 <ion-label>
 <h4 style="font-size:18px;font-weight:bold;text-transform:capitalize"> {{ row.animal.name }}
-<ion-badge color="dark">
-{{  row.animal.tag }}
-</ion-badge></h4>
+</h4>
 </ion-label>
+<ion-badge color="light" style="border:solid thin #e5e8e8 ;">
+   Tag:  {{  row.animal.tag }}
+    </ion-badge>
 </ion-list-header>
 </ion-list>
 

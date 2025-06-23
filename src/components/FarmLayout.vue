@@ -6,7 +6,8 @@ import {
 add,
 briefcase,
 bug,
-chevronUpCircle
+chevronUpCircle,
+people
 } from 'ionicons/icons';
 import { computed, onMounted, reactive } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
@@ -92,28 +93,31 @@ Size: {{ f.size}} | {{ f.type }}
 
 </div>
 <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button color="dark">
-    <ion-icon :icon="chevronUpCircle"></ion-icon>
-    </ion-fab-button>
-    <ion-fab-list side="top">
+<ion-fab-button color="dark">
+<ion-icon :icon="chevronUpCircle"></ion-icon>
+</ion-fab-button>
+<ion-fab-list side="top">
 
-    <ion-fab-button>
-    <ion-icon :icon="bug"></ion-icon>
-    </ion-fab-button>
-    <ion-fab-button>
-    <span class="material-icons">assignment</span>
-    </ion-fab-button>
-    <ion-fab-button>
-    <ion-icon :icon="briefcase"></ion-icon>
-    </ion-fab-button>
+<ion-fab-button>
+<ion-icon :icon="bug"></ion-icon>
+</ion-fab-button>
+<ion-fab-button>
+<span class="material-icons">assignment</span>
+</ion-fab-button>
+<ion-fab-button>
+<ion-icon :icon="briefcase"></ion-icon>
+</ion-fab-button>
+<ion-fab-button>
+<ion-icon :icon="people"></ion-icon>
+</ion-fab-button>
 
-    <ion-fab-button @click="router.push('/farm/add/'+farmDetails.id)">
-    <ion-icon :icon="add"></ion-icon>
-    </ion-fab-button>
-    </ion-fab-list>
+<ion-fab-button @click="router.push('/farm/add/'+farmDetails.id)">
+<ion-icon :icon="add"></ion-icon>
+</ion-fab-button>
+</ion-fab-list>
 
 
-    </ion-fab>
+</ion-fab>
 
 </app-layout>
 </template>
