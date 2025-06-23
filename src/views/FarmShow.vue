@@ -21,7 +21,7 @@
 
 </farm-layout>
 </template>
-<script setup >
+<script setup>
 import FarmLayout from '@/components/FarmLayout.vue';
 import {IonItem, IonLabel,IonFab, IonFabButton, IonFabList,IonIcon ,IonAvatar,IonList, IonListHeader} from '@ionic/vue';
 import { reactive, onMounted } from 'vue';
