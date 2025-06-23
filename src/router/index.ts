@@ -46,9 +46,9 @@ name:'farm'
 
 },
 {
-  path:'/search',
-  component:()=>import('@/views/Search.vue'),
-  name:'search'
+path:'/search',
+component:()=>import('@/views/Search.vue'),
+name:'search'
 },
 {
 path:'/farm/create',
@@ -56,27 +56,25 @@ component:()=>import('@/views/CreateFarm.vue'),
 name:'create farm'
 },
 {
-  path:'/farm/show/:id',
-  component:()=>import('@/views/FarmShow.vue'),
-  name:'show farm'
+path:'/farm/show/:id',
+component:()=>import('@/views/FarmShow.vue'),
+name:'show farm'
 
 },
 {
-  path:'/farm/add/:id',
-  component:()=>import('@/views/FarmAddItems.vue'),
-  name:'farm add items'
+path:'/farm/add/:id',
+component:()=>import('@/views/FarmAddItems.vue'),
+name:'farm add items'
 },
 {
-  path:'/animal/add/:id',
-  component:()=>import('@/views/FarmAnimalCreate.vue'),
-  name:'add farm animal'
+path:'/animal/add/:id',
+component:()=>import('@/views/FarmAnimalCreate.vue'),
+name:'add farm animal'
 },
 {
 path:'/animal/:id',
 component:()=>import('@/views/AnimalShow.vue'),
 name:'animal details'
-
-
 }
 
 

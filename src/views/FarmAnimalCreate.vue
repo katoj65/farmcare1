@@ -57,10 +57,6 @@ Add farm animal
 <ion-button expand="block" style="width:100%;margin-top:20px;" class="ion-button" size="default" type="submit">Save</ion-button>
 </ion-item>
 
-
-
-
-
 </ion-list>
 </form>
 </div>
