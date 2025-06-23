@@ -63,36 +63,19 @@
 
 
 
-<ion-item lines="none">
-<ion-label>Immunisation</ion-label>
+
+<ion-item v-for="(r,key) in row.report" :key="key">
+<ion-label style="text-transform:capitalize">
+{{ r.type }}
+</ion-label>
 <ion-note color="medium" style="font-size:15px;">
-None
+{{ r.description }} {{ measurements(r.type) }}
 </ion-note>
 </ion-item>
 
 
-<ion-item lines="none">
-<ion-label>Disease</ion-label>
-<ion-note color="medium" style="font-size:15px;">
-None
-</ion-note>
-</ion-item>
 
 
-<ion-item lines="none">
-<ion-label>Gestation</ion-label>
-<ion-note color="medium" style="font-size:15px;">
-None
-</ion-note>
-</ion-item>
-
-
-<ion-item lines="none">
-<ion-label>Feeding</ion-label>
-<ion-note color="medium" style="font-size:15px;">
-None
-</ion-note>
-</ion-item>
 
 
 
@@ -101,15 +84,6 @@ None
 
 
 </ion-list>
-
-
-
-
-
-
-
-
-
 </div>
 
 
@@ -130,11 +104,6 @@ None
 
 
 
-
-
-
-
-
 <ion-modal :is-open="isOpen" v-if="route.name=='animal details'">
 <ion-header>
 <ion-toolbar>
@@ -148,17 +117,22 @@ None
 <ion-list>
 <ion-list-header color="light">
 <ion-label>
-<h4 style="font-size:18px;font-weight:bold;text-transform:capitalize"> {{ row.animal.name }}</h4>
+<h4 style="font-size:18px;font-weight:bold;text-transform:capitalize"> {{ row.animal.name }}
+<ion-badge color="dark">
+{{  row.animal.tag }}
+</ion-badge></h4>
 </ion-label>
 </ion-list-header>
 </ion-list>
 
 
-
 <form style="padding:15px;" @submit.prevent="submit">
 <ion-list style="border:solid thin #e5e8e8;border-radius:10px;padding-bottom:15px; ">
+<div v-if="message.error!=null" style="padding:10px;color:red;">
+{{ message.error }}
+</div>
 <ion-item>
-<ion-select label="Report" placeholder="Select option">
+<ion-select label="Report" placeholder="Select option" v-model="form.report">
 <ion-select-option value="animal temperature">Animal Temperature</ion-select-option>
 <ion-select-option value="heartbeat">Heartbeat</ion-select-option>
 <ion-select-option value="environmental temperature">Environmental temperature</ion-select-option>
@@ -166,7 +140,7 @@ None
 </ion-item>
 
 <ion-item>
-<ion-input label="Measurements" placeholder="Enter readings" type="number"></ion-input>
+<ion-input label="Measurements" placeholder="Enter readings" type="number" v-model="form.description"></ion-input>
 </ion-item>
 
 
@@ -194,12 +168,13 @@ import { useRoute } from 'vue-router';
 import { reactive, onMounted, computed,ref } from 'vue';
 import {db} from '@/Database/database';
 import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle,IonItem, IonLabel, IonList, IonNote,IonListHeader, IonIcon, IonButton, IonFab, IonFabButton,
-IonButtons,IonModal, IonHeader, IonToolbar, IonContent, IonTitle,IonInput, IonSelect,IonSelectOption   } from '@ionic/vue';
+IonButtons,IonModal, IonHeader, IonToolbar, IonContent, IonTitle,IonInput, IonSelect,IonSelectOption,  IonBadge   } from '@ionic/vue';
 import { ellipsisHorizontalCircleSharp,add } from 'ionicons/icons';
 
 const row=reactive({
 animal:'',
 back:'',
+report:[]
 });
 
 
@@ -215,8 +190,21 @@ if(response.error==null){
 // row.animal=response.data;
 response.data.forEach(element => {
 row.animal=element
-row.back='/farm/show/'+element.farm.id
+row.back='/farm/show/'+element.farm.id;
 });
+
+//get animal reports
+db.from('animal_report')
+.select("*")
+.eq('animal_id',row.animal.id)
+.then((response)=>{
+if(response.error==null){
+row.report=response.data;
+}else{
+console.log(response.error);
+}
+})
+.catch((error)=>{console.log(error)});
 }else{
 console.log(response.error);
 }
@@ -224,6 +212,10 @@ console.log(response.error);
 .catch((error)=>{console.log(error)});
 
 });
+
+
+
+
 
 
 const dateFormat=computed((date)=>{
@@ -239,8 +231,8 @@ isOpen.value=state;
 
 
 const form=reactive({
-type:'',
-qtty:''
+report:'',
+description:''
 });
 
 const message=reactive({
@@ -248,10 +240,68 @@ error:null,
 });
 
 
+const measurements=(item)=>{
+let measure='';
+if(item==='animal temperature'){
+measure='Degrees';
+}else if(item==='heartbeat'){
+measure='Hbps';
+}else if(item==='environmental temperature'){
+measure='Degrees';
+}
+return measure;
+};
+
+
+
+
+
+
+
+
+
+
+
 
 
 const submit=()=>{
-alert();
+let id=route.path.split('/');
+message.error=null;
+if(form.report=='' || form.description==''){
+message.error='Fill in all fields';
+}else{
+db.from('animal_report')
+.insert([{
+animal_id:id[2],
+type:form.report,
+description:form.description,
+status:'active'
+//status:['active','treatment','healed']
+}
+])
+.select()
+.then((response)=>{
+if(response.error==null){
+modal(false);
+form.description='';
+form.report='';
+response.data.forEach(element => {
+row.report.push(element);
+});
+
+
+
+
+}else{
+console.log(response.error);
+}
+})
+.catch((error)=>{console.log(error)})
+
+}
+
+
+
 }
 
 
