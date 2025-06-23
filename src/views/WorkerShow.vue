@@ -25,19 +25,12 @@ db.from('worker')
 .then((response)=>{
 if(response.error==null){
 row.worker=response.data;
-console.log(response);
 }else{
 console.log(response.error);
 }
 })
 .catch((error)=>{console.log(error)});
-
-
-
 });
-
-
-
 
 </script>
 <template>
