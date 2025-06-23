@@ -62,7 +62,7 @@ Add farm animal
 </div>
 </farm-layout>
 </template>
-<script setup lang="ts">
+<script setup >
 import FarmLayout from '@/components/FarmLayout.vue';
 import { IonIcon, IonItem, IonLabel, IonList, IonInput,IonButton, IonSelect, IonSelectOption} from '@ionic/vue';
 import { reactive } from 'vue';

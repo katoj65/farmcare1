@@ -59,7 +59,7 @@
 </div>
 </app-layout>
 </template>
-<script setup lang="ts">
+<script setup>
 import AppLayout from '@/components/AppLayout.vue';
 import { useRoute } from 'vue-router';
 import { reactive, onMounted } from 'vue';

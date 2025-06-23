@@ -17,7 +17,7 @@
 
 </farm-layout>
 </template>
-<script setup lang="ts">
+<script setup >
 import FarmLayout from '@/components/FarmLayout.vue';
 import {IonItem, IonLabel,IonFab, IonFabButton, IonFabList,IonIcon ,IonAvatar,IonActionSheet} from '@ionic/vue';
 import { reactive, onMounted } from 'vue';
@@ -39,7 +39,6 @@ db.from('animal')
 .select('*')
 .eq('farm_id',id[3])
 .then((response)=>{
-console.log(response);
 if(response.error==null){
 row.animal=response.data;
 }else{

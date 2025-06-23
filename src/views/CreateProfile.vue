@@ -47,10 +47,10 @@
 </ion-page>
 </template>
 
-<script setup lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent,IonInput, IonItem, IonList,IonButton } from '@ionic/vue';
-import {store} from '@/store/Index';
-import {db} from '@/Database/database';
+<script setup >
+import { db } from '@/Database/database';
+import { store } from '@/store/Index';
+import { IonButton, IonContent, IonHeader, IonInput, IonItem, IonList, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 

@@ -11,7 +11,7 @@
 
 </farm-layout>
 </template>
-<script setup lang="ts">
+<script setup >
 import FarmLayout from '@/components/FarmLayout.vue';
 import { IonAvatar, IonItem, IonLabel, IonList, IonIcon } from '@ionic/vue';
 import { addCircleOutline } from 'ionicons/icons';

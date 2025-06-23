@@ -33,11 +33,10 @@
 </ion-page>
 </template>
 
-<script setup lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent,IonButton, IonButtons, IonIcon,IonBackButton } from '@ionic/vue';
-import {store} from '@/store/Index';
+<script setup>
+import { IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+import { personCircle, search } from 'ionicons/icons';
 import { useRouter } from 'vue-router';
-import { search, personCircle } from 'ionicons/icons';
 
 
 const props=defineProps({

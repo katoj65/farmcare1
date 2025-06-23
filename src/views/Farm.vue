@@ -1,11 +1,11 @@
-<script setup lang="ts">
+<script setup >
 import AppLayout from '@/components/AppLayout.vue';
-import {db} from '@/Database/database';
-import { IonItem, IonLabel,  IonFab, IonFabButton, IonIcon } from '@ionic/vue';
-import { caretForwardOutline, add } from 'ionicons/icons';
+import { db } from '@/Database/database';
+import { store } from '@/store/Index';
+import { IonFab, IonFabButton, IonIcon, IonItem, IonLabel } from '@ionic/vue';
+import { add } from 'ionicons/icons';
+import { onMounted, reactive } from 'vue';
 import { useRouter } from 'vue-router';
-import { reactive,onMounted } from 'vue';
-import {store} from '@/store/Index';
 
 
 

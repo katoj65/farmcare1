@@ -5,12 +5,12 @@
 </ion-app>
 </template>
 
-<script setup lang="ts">
+<script setup>
+import { db } from '@/Database/database';
+import { store } from '@/store/Index';
 import { IonApp, IonRouterOutlet } from '@ionic/vue';
+import { onBeforeMount } from 'vue';
 import Login from './components/Login.vue';
-import {store} from '@/store/Index';
-import { onMounted, onBeforeMount } from 'vue';
-import {db} from '@/Database/database';
 
 
 

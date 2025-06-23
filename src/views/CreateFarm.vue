@@ -1,8 +1,8 @@
-<script lang="ts" setup>
+<script setup>
 import AppLayout from '@/components/AppLayout.vue';
-import { IonInput, IonItem, IonList, IonSelect, IonSelectOption, IonButton  } from '@ionic/vue';
-import {store} from '@/store/Index';
-import {db} from '@/Database/database';
+import { db } from '@/Database/database';
+import { store } from '@/store/Index';
+import { IonButton, IonInput, IonItem, IonList, IonSelect, IonSelectOption } from '@ionic/vue';
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 

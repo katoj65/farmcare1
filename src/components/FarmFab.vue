@@ -29,7 +29,7 @@
 
 </ion-fab>
 </template>
-<script setup lang="ts">
+<script setup >
 import {IonFab, IonFabButton, IonFabList,IonIcon,IonActionSheet,
 } from '@ionic/vue';
 import {

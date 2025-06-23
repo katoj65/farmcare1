@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script  setup>
 import AppLayout from '@/components/AppLayout.vue';
 import { IonHeader, IonSearchbar, } from '@ionic/vue';
 import { reactive} from 'vue';

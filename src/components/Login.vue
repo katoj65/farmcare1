@@ -27,12 +27,12 @@
 </form>
 </IonContent>
 </template>
-<script setup lang="ts">
-import { IonContent, IonInput, IonItem, IonList,IonButton, IonIcon  } from '@ionic/vue';
+<script setup>
+import { db } from '@/Database/database';
+import { store } from '@/store/Index';
+import { IonButton, IonContent, IonIcon, IonInput, IonItem, IonList } from '@ionic/vue';
 import { logoIonic } from 'ionicons/icons';
 import { reactive } from 'vue';
-import {store} from '@/store/Index';
-import {db} from '@/Database/database';
 import { useRouter } from 'vue-router';
 
 

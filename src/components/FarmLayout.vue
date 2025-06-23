@@ -1,23 +1,15 @@
-<script setup lang="ts">
+<script setup >
 import AppLayout from '@/components/AppLayout.vue';
-import { reactive } from 'vue';
-import {store} from '@/store/Index';
-import {db} from '@/Database/database';
-import { onMounted,computed } from 'vue';
-import { useRoute,useRouter } from 'vue-router';
-import {IonBadge, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle,IonItem, IonLabel,IonFab, IonFabButton, IonFabList,IonIcon ,IonAvatar,} from '@ionic/vue';
+import { db } from '@/Database/database';
+import { IonBadge, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonFab, IonFabButton, IonFabList, IonIcon } from '@ionic/vue';
 import {
-chevronDownCircle,
-chevronForwardCircle,
-chevronUpCircle,
-colorPalette,
-document,
+add,
 briefcase,
 bug,
-addCircleOutline,
-add
+chevronUpCircle
 } from 'ionicons/icons';
-import FarmFab from '@/components/FarmFab.vue'
+import { computed, onMounted, reactive } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
 
 

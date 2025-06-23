@@ -1,5 +1,5 @@
 
-<script setup lang="ts">
+<script setup >
 import AppLayout from '@/components/AppLayout.vue';
 import { IonCol, IonGrid, IonRow,IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonIcon } from '@ionic/vue';
 import { logoIonic, leaf, people,documentText,briefcase,fitness,bug } from 'ionicons/icons';

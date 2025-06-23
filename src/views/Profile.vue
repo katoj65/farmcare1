@@ -37,12 +37,12 @@
 </app-layout>
 </template>
 
-<script setup lang="ts">
+<script setup >
 import AppLayout from '@/components/AppLayout.vue';
-import {db} from '@/Database/database';
-import { computed, onMounted,reactive } from 'vue';
-import {store} from '@/store/Index';
+import { db } from '@/Database/database';
+import { store } from '@/store/Index';
 import { IonItem, IonLabel } from '@ionic/vue';
+import { onMounted, reactive } from 'vue';
 
 const data=reactive({
 profile:null,
