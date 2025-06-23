@@ -19,7 +19,6 @@
 <ion-button color="light">
 <ion-icon aria-hidden="true" :icon="ellipsisHorizontalCircleSharp" />
 </ion-button>
-
 </ion-note>
 </ion-item>
 

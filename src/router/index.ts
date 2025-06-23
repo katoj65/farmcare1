@@ -86,7 +86,11 @@ path:'/worker/show/:id',
 component:()=>import('@/views/WorkerShow.vue'),
 name:'farm worker'
 },
-
+{
+path:'/farm/workers/:id',
+component:()=>import('@/views/FarmWorkers.vue'),
+name:'farm workers'
+},
 
 
 

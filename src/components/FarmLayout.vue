@@ -107,7 +107,8 @@ Size: {{ f.size}} | {{ f.type }}
 <ion-fab-button>
 <ion-icon :icon="briefcase"></ion-icon>
 </ion-fab-button>
-<ion-fab-button>
+
+<ion-fab-button @click="router.push('/farm/workers/'+farmDetails.id)">
 <ion-icon :icon="people"></ion-icon>
 </ion-fab-button>
 

@@ -36,14 +36,14 @@ console.log(response.error);
 <app-layout title="Farm worker">
 <div v-for="(w,key) in row.worker" :key="key">
 
-<ion-list >
+<ion-list>
 <ion-item lines="none" color="light" inset="none">
 <ion-avatar aria-hidden="true" slot="start">
 <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
 </ion-avatar>
 <ion-label style="font-weight:bolder;">{{ w.firstname }} {{ w.lastname }} </ion-label>
 <ion-note color="medium" style="text-transform:capitalize;font-size:15px;">
-    <ion-button color="light"><ion-icon :icon="ellipsisHorizontalCircleSharp" ></ion-icon></ion-button>
+<ion-button color="light"><ion-icon :icon="ellipsisHorizontalCircleSharp" ></ion-icon></ion-button>
 </ion-note>
 </ion-item>
 
