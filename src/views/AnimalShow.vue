@@ -16,9 +16,6 @@
 {{ row.animal.name }}
 </ion-label>
 <ion-note color="medium" style="font-size:15px;">
-<ion-button color="light">
-<ion-icon aria-hidden="true" :icon="ellipsisHorizontalCircleSharp" />
-</ion-button>
 </ion-note>
 </ion-item>
 
@@ -93,13 +90,12 @@
 
 
 
-
-<div v-if="row.report.length>0" style="margin-top:3px;">
-<ion-item lines="full">
+<div v-if="row.report.length>0" style="margin-top:5px;border:solid thin #e5e8e8;margin:10px;border-radius:5px;">
+<ion-item lines="none">
 <h6 style="font-weight:bold;">Recommendations</h6>
 </ion-item>
 <ion-list v-for="(r,key) in row.report" :key="key">
-<ion-item v-for="(x,key) in doctor(r.type,r.description)" :key="key" lines="full">
+<ion-item v-for="(x,key) in doctor(r.type,r.description)" :key="key" lines="none">
 <ion-icon :icon="chevronForward" ></ion-icon>
 <ion-label>{{ x.action }}</ion-label>
 </ion-item>
@@ -153,7 +149,7 @@
 <h4 style="font-size:18px;font-weight:bold;text-transform:capitalize"> {{ row.animal.name }}
 </h4>
 </ion-label>
-<span style="font-size:14px;">{{  row.animal.tag }}</span>
+<span style="font-size:14px;">Tag: {{  row.animal.tag }}</span>
 </ion-list-header>
 </ion-list>
 
@@ -339,12 +335,12 @@ const doctor=(option,count)=>{
 //environmental temperature.
 let response=[];
 if(option=='animal temperature'){
-    
+
 if(count>35 && count<40){
 response.push({action:'Animal temperature normal.'});
 }else if(count>40){
 response.push({action:'Antibiotics.'});
-response.push({action:'Isolation.'});
+response.push({action:'Isolate the animal.'});
 }else{
 response.push({action:'Move to animal to shade.'});
 }
