@@ -16,7 +16,7 @@ const route=useRoute();
 onMounted(()=>{
 const id=route.path.split('/');
 db.from('animal_report')
-.select('*,animal(name,id)')
+.select('*,animal(name,id,farm(name))')
 .then((response)=>{
 if(response.error==null){
 row.animal=response.data;
@@ -49,14 +49,16 @@ return measure;
 </script>
 
 <template>
-<app-layout title="Employees" back="/">
+<app-layout title="Reports" back="/">
 <div style="padding-bottom:100px;">
 <ion-list>
 
 <ion-item  detail="true" v-for="(a,key) in row.animal" :key="key" @click="router.push('/animal/'+a.animal.id)">
 <ion-icon :icon="clipboardOutline" slot="start"></ion-icon>
 <ion-label>
-<h3 style="text-transform:capitalize;font-weight:bold;font-size:14px;">{{ a.animal.name }} </h3>
+<h3 style="text-transform:capitalize;font-weight:bold;font-size:14px;">{{ a.animal.name }}
+- ({{ a.animal.farm.name }})
+</h3>
 <p style="text-transform:capitalize;">
 {{ a.type }} : {{ a.description }} {{ measurements(a.type) }}
 </p>

@@ -1,6 +1,28 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
-import TabsPage from '../views/TabsPage.vue'
+import TabsPage from '../views/TabsPage.vue';
+import { store } from '@/store/Index';
+import { db } from '@/Database/database';
+import { ref } from 'vue';
+
+let session=ref('');
+db.auth.getSession().then((response)=>{
+if(response.error==null){
+console.log(response);
+if(response.data.session==null){
+session.value='';
+}else{
+session.value=response.data.session.user.email;
+}
+}else{
+console.log(response.error);
+}
+}).catch((error)=>{console.log(error)});
+
+
+
+
+
 
 const routes: Array<RouteRecordRaw> = [
 {
@@ -97,10 +119,16 @@ component:()=>import('@/views/Employees.vue'),
 name:'employees'
 },
 {
-  path:'/reports',
-  component:()=>import('@/views/Reports.vue'),
-  name:'reports'
-  },
+path:'/reports',
+component:()=>import('@/views/Reports.vue'),
+name:'reports'
+},
+{
+path:'/register',
+component:()=>import(session==null?'@/views/Register.vue':'@/views/Register.vue'),
+name:session,
+
+},
 
 
 

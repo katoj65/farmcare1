@@ -32,7 +32,9 @@
 </ion-label>
 </ion-item>
 
-
+<ion-item button @click="logout">
+<ion-label>Logout</ion-label>
+</ion-item>
 </div>
 </app-layout>
 </template>
@@ -42,7 +44,8 @@ import AppLayout from '@/components/AppLayout.vue';
 import { db } from '@/Database/database';
 import { store } from '@/store/Index';
 import { IonItem, IonLabel } from '@ionic/vue';
-import { onMounted, reactive } from 'vue';
+import { onMounted, reactive} from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
 const data=reactive({
 profile:null,
@@ -68,6 +71,11 @@ console.log(error)});
 
 
 
+const router=useRouter();
+const logout =()=>{
+db.auth.signOut();
+router.push('/');
+}
 
 
 
