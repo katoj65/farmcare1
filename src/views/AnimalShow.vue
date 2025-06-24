@@ -94,6 +94,22 @@
 
 
 
+<div v-if="row.report.length>0" style="margin-top:3px;">
+<ion-item lines="full">
+<h6 style="font-weight:bold;">Recommendations</h6>
+</ion-item>
+<ion-list v-for="(r,key) in row.report" :key="key">
+<ion-item v-for="(x,key) in doctor(r.type,r.description)" :key="key" lines="full">
+<ion-icon :icon="chevronForward" ></ion-icon>
+<ion-label>{{ x.action }}</ion-label>
+</ion-item>
+</ion-list>
+
+
+</div>
+
+
+
 
 
 
@@ -185,7 +201,8 @@ import { reactive, onMounted, computed,ref } from 'vue';
 import {db} from '@/Database/database';
 import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle,IonItem, IonLabel, IonList, IonNote,IonListHeader, IonIcon, IonButton, IonFab, IonFabButton,
 IonButtons,IonModal, IonHeader, IonToolbar, IonContent, IonTitle,IonInput, IonSelect,IonSelectOption, IonBadge, IonAvatar   } from '@ionic/vue';
-import { ellipsisHorizontalCircleSharp,add } from 'ionicons/icons';
+import { ellipsisHorizontalCircleSharp, add, chevronForward } from 'ionicons/icons';
+
 
 const row=reactive({
 animal:'',
@@ -303,20 +320,62 @@ response.data.forEach(element => {
 row.report.push(element);
 });
 
-
-
-
 }else{
 console.log(response.error);
 }
 })
 .catch((error)=>{console.log(error)})
+}
+}
 
+//
+
+
+
+
+const doctor=(option,count)=>{
+//animal temperature.
+//heartbeat.
+//environmental temperature.
+let response=[];
+if(option=='animal temperature'){
+    
+if(count>35 && count<40){
+response.push({action:'Animal temperature normal.'});
+}else if(count>40){
+response.push({action:'Antibiotics.'});
+response.push({action:'Isolation.'});
+}else{
+response.push({action:'Move to animal to shade.'});
+}
+
+}else if(option=='heartbeat'){
+
+if(count>=48 && count<=84){
+response.push({action:'Heartbeat is normal.'});
+}else if(count>84){
+response.push({action:'Refer to the veterinary doctor for heartbeat.'});
+}else{
+response.push({action:'Refer to the veterinary doctor.'});
+}
+
+
+}else if(option=='environmental temperature'){
+
+if(count>=20 && count<=35){
+response.push({action:'Environment temperature is normal.'});
+}else if(count>35){
+response.push({action:'Provide shade, clean water.'});
+response.push({action:'Adjust dietary needs.'});
+}
+
+}
+
+return response;
 }
 
 
 
-}
 
 
 
