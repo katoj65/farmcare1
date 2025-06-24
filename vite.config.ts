@@ -15,12 +15,12 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg'],
       manifest: {
-        name: 'My PWA App',
-        short_name: 'PWA App',
+        name: 'FarmCare',
+        short_name: 'FarmCare',
         start_url: 'https://katoj65.github.io/farmcare1/',
         display: 'standalone',
         background_color: '#ffffff',
-        theme_color: '#3880ff',
+        theme_color: '#fffff',
         icons: [
           {
             src: 'icons/pwa-192x192.png',
