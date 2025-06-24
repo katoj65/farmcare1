@@ -137,9 +137,7 @@
 <h4 style="font-size:18px;font-weight:bold;text-transform:capitalize"> {{ row.animal.name }}
 </h4>
 </ion-label>
-<ion-badge color="light" style="border:solid thin #e5e8e8 ;">
-   Tag:  {{  row.animal.tag }}
-    </ion-badge>
+<span style="font-size:14px;">{{  row.animal.tag }}</span>
 </ion-list-header>
 </ion-list>
 

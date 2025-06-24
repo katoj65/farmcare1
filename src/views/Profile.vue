@@ -73,6 +73,7 @@ console.log(error)});
 
 const router=useRouter();
 const logout =()=>{
+store.state.user='';
 db.auth.signOut();
 router.push('/');
 }

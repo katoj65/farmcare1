@@ -2,7 +2,7 @@
 <ion-page>
 <ion-content :fullscreen="true" class="ion-padding" style="text-align:center">
 
-{{ route.name }}
+
 
 <h1>
 <ion-icon :icon="logoIonic" size="large"  color="secondary"></ion-icon>

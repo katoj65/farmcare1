@@ -3,25 +3,7 @@ import { RouteRecordRaw } from 'vue-router';
 import TabsPage from '../views/TabsPage.vue';
 import { store } from '@/store/Index';
 import { db } from '@/Database/database';
-import { ref } from 'vue';
-
-let session=ref('');
-db.auth.getSession().then((response)=>{
-if(response.error==null){
-console.log(response);
-if(response.data.session==null){
-session.value='';
-}else{
-session.value=response.data.session.user.email;
-}
-}else{
-console.log(response.error);
-}
-}).catch((error)=>{console.log(error)});
-
-
-
-
+import { ref,Ref,onMounted } from 'vue';
 
 
 const routes: Array<RouteRecordRaw> = [
@@ -125,8 +107,8 @@ name:'reports'
 },
 {
 path:'/register',
-component:()=>import(session==null?'@/views/Register.vue':'@/views/Register.vue'),
-name:session,
+component:()=>import('@/views/Register.vue'),
+name:'register',
 
 },
 
@@ -138,6 +120,46 @@ name:session,
 const router = createRouter({
 history: createWebHistory(import.meta.env.BASE_URL),
 routes
-})
+});
+
+
+
+router.beforeEach(async (to,from,next)=>{
+let session= await db.auth.getSession();
+// .then((response)=>{
+// if(response.error==null){
+// if(response.data.session==null){
+// return response;
+// }else{
+// let email=response.data.session.user.email;
+// return response;
+// }
+// }else{
+// console.log(response.error);
+// }
+// }).catch((error)=>{console.log(error)});
+if(session.error==null){
+if(session.data.session==null){
+return next();
+}else{
+next();
+}
+}else{
+next({ name: 'register' })
+}
+
+// console.log(session.data.session);
+
+
+});
+
+
+
+
+
+
+
+
+
 
 export default router
