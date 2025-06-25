@@ -38,6 +38,17 @@ import '@ionic/vue/css/palettes/dark.system.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 import 'material-icons/iconfont/material-icons.css';
 import './theme/variables.css';
+import { StatusBar, Style } from '@capacitor/status-bar'
+
+StatusBar.setStyle({ style: Style.Light }); // or Style.Dark
+StatusBar.setBackgroundColor({ color: '#fffff' }) ;
+
+
+
+
+
+
+
 
 const app = createApp(App)
   .use(IonicVue)

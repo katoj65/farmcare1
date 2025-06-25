@@ -1,13 +1,18 @@
 <script setup >
 import AppLayout from '@/components/AppLayout.vue';
 import { db } from '@/Database/database';
-import { IonBadge, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonFab, IonFabButton, IonFabList, IonIcon } from '@ionic/vue';
+import { IonBadge, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonFab, IonFabButton, IonFabList, IonIcon,IonItem,
+    IonLabel,
+    IonList,
+    IonNote,
+    IonText, } from '@ionic/vue';
 import {
 add,
 briefcase,
 bug,
 chevronUpCircle,
-people
+people,chevronForward,
+call
 } from 'ionicons/icons';
 import { computed, onMounted, reactive } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
@@ -67,7 +72,8 @@ return items;
 
 <div  v-for="(f,key) in data.farm" :key="key">
 
-<ion-card color="light" style="box-shadow:none;border:solid thin #e5e8e8;">
+
+<!-- <ion-card color="light" style="box-shadow:none;border:solid thin #e5e8e8;">
 <ion-card-header style="margin-bottom:0;padding-bottom:0;">
 <ion-card-subtitle style="font-size:15px;">{{ f.name }}</ion-card-subtitle>
 </ion-card-header>
@@ -80,7 +86,25 @@ Size: {{ f.size}} | {{ f.type }}
 <ion-badge slot="start" color="dark"> 0{{ f.tel }}</ion-badge>
 </p>
 </ion-card-content>
-</ion-card>
+</ion-card> -->
+
+
+<ion-item :button="true" detail="false" lines="full">
+<div class="unread-indicator-wrapper" slot="start"></div>
+<ion-label>
+<strong style="font-size:20px;">{{ f.name }}</strong><br />
+<ion-text>Located at {{ f.location }}</ion-text><br />
+<ion-note color="medium" class="ion-text-wrap">Size: {{ f.size}} | {{ f.type }}</ion-note>
+</ion-label>
+<div class="metadata-end-wrapper" slot="end">
+<ion-icon color="medium" :icon="call"></ion-icon>
+<ion-note color="medium">0{{ f.tel }}</ion-note>
+</div>
+</ion-item>
+
+
+
+
 
 
 

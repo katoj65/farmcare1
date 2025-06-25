@@ -1,7 +1,7 @@
 <script setup>
 import AppLayout from '@/components/AppLayout.vue';
 import {db} from '@/Database/database';
-import { IonItem, IonLabel,  IonFab, IonFabButton, IonIcon } from '@ionic/vue';
+import { IonItem, IonLabel,  IonFab, IonFabButton, IonIcon, IonAvatar } from '@ionic/vue';
 import { caretForwardOutline, add,leaf } from 'ionicons/icons';
 import { useRouter } from 'vue-router';
 import { reactive,onMounted } from 'vue';
@@ -43,8 +43,10 @@ data.farm=response.data;
 <template>
 <app-layout title="Farm" back="/">
 
-<ion-item detail="true" v-for="(f,key) in data.farm" :key="key" @click="router.push('/farm/show/'+f.id)">
-<ion-icon :icon="leaf" slot="start"></ion-icon>
+<ion-item detail="true" v-for="(f,key) in data.farm" :key="key" @click="router.push('/farm/show/'+f.id)" lines="full" button="">
+<ion-avatar slot="start">
+<img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+</ion-avatar>
 <ion-label>
 <h3 style="font-weight:bold;">
 {{ f.name }}
