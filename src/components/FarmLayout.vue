@@ -89,11 +89,11 @@ Size: {{ f.size}} | {{ f.type }}
 </ion-card> -->
 
 
-<ion-item :button="true" detail="false" lines="full">
+<ion-item  detail="false" lines="none" color="light">
 <div class="unread-indicator-wrapper" slot="start"></div>
 <ion-label>
-<strong style="font-size:20px;">{{ f.name }}</strong><br />
-<ion-text>Located at {{ f.location }}</ion-text><br />
+<strong style="font-size:25px;">{{ f.name }}</strong><br /><br />
+<ion-text>Located at {{ f.location }}</ion-text><br /><br />
 <ion-note color="medium" class="ion-text-wrap">Size: {{ f.size}} | {{ f.type }}</ion-note>
 </ion-label>
 <div class="metadata-end-wrapper" slot="end">
