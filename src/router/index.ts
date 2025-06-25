@@ -111,15 +111,30 @@ component:()=>import('@/views/Register.vue'),
 name:'register',
 },
 {
-  path:'/message',
-  component:()=>import('@/views/Message.vue'),
-  name:'message'
+path:'/message',
+component:()=>import('@/views/Message.vue'),
+name:'message'
 },
 {
-  path:'/share/:id',
-  component:()=>import('@/views/ShareAnimalReport.vue'),
-  name:'share'
-  }
+path:'/share/:id',
+component:()=>import('@/views/ShareAnimalReport.vue'),
+name:'share'
+},
+{
+path:'/farm/reports/:id',
+component:()=>import('@/views/FarmReports.vue'),
+name:'farm reports'
+},
+{
+path:'/inventory/add/:id',
+component:()=>import('@/views/FarmInventoryAdd.vue'),
+name:'add inventory'
+},
+{
+path:'/farm/inventory/:id',
+component:()=>import('@/views/FarmInventory.vue'),
+name:'inventory'
+}
 
 
 

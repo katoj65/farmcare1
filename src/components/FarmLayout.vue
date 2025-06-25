@@ -125,10 +125,10 @@ Size: {{ f.size}} | {{ f.type }}
 <ion-fab-button>
 <ion-icon :icon="bug"></ion-icon>
 </ion-fab-button>
-<ion-fab-button>
+<ion-fab-button @click="router.push('/farm/reports/'+farmDetails.id)">
 <span class="material-icons">assignment</span>
 </ion-fab-button>
-<ion-fab-button>
+<ion-fab-button @click="router.push('/farm/inventory/'+farmDetails.id)">
 <ion-icon :icon="briefcase"></ion-icon>
 </ion-fab-button>
 

@@ -30,8 +30,7 @@ return r[3];
 const menu=[
 {title:'Add animal',icon:addCircleOutline ,url:'/animal/add/'},
 {title:'Add farm worker',icon:addCircleOutline  ,url:'/worker/add/'},
-// {title:'Add veterinary doctor',icon:addCircleOutline  ,url:'/animal/add/'},
-// {title:'Add record',icon:addCircleOutline  ,url:'/animal/add/'},
+{title:'Add farm inventory',icon:addCircleOutline  ,url:'/inventory/add/'},
 
 
 ];

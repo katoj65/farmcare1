@@ -71,23 +71,29 @@ return 'dmkdmkd';
 <template>
 <app-layout title="Messages" back="/">
 
-
-
-
 <ion-list>
-
 <ion-item detail="false" v-for="(m,key) in row.message" :key="key" lines="none" style="border:solid thin #e5e8e8">
 <ion-label>
 <strong style="text-transform:capitalize;">
-{{ m.animal.name }} - {{ m.animal.tag }} - {{ m.animal.farm.name }}
+ Animal health report
 </strong><br/>
 <ion-note color="medium" class="ion-text-wrap">
 
-<table style="width:100%; margin-top:10px;"  >
+<table style="width:100%; margin-top:10px;" >
+<tr>
+<th colspan="2" style="text-align:left;text-transform:capitalize">
+{{ m.animal.name }} - {{ m.animal.tag }}
+</th>
+</tr>
 <tr v-for="(s,key) in m.message" :key="key">
 <td style="text-align:left; text-transform:capitalize;">{{ s.type }} </td>
 <td style="text-align:left;font-size:14px;width:30%;">
 {{ s.description }} {{ measurements(s.type) }}
+</td>
+</tr>
+<tr>
+<td colspan="2">
+From:  {{ m.animal.farm.name }}
 </td>
 </tr>
 </table>
