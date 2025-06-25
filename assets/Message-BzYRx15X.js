@@ -1,0 +1,1 @@
+import{_ as s}from"./AppLayout-DqhTgnyn.js";import{c as t,w as a,o,v as r}from"./index-B-tXsQ86.js";const m={__name:"Message",setup(_){return(n,e)=>(o(),t(s,{title:"Messages",back:"/"},{default:a(()=>e[0]||(e[0]=[r(" Message information ")])),_:1,__:[0]}))}};export{m as default};

@@ -1,0 +1,1 @@
+System.register(["./AppLayout-legacy-BwIezFx5.js","./index-legacy-DI3to2k-.js"],function(e,t){"use strict";var s,a,n,u,c;return{setters:[e=>{s=e._},e=>{a=e.c,n=e.w,u=e.o,c=e.v}],execute:function(){e("default",{__name:"Message",setup:e=>(e,t)=>(u(),a(s,{title:"Messages",back:"/"},{default:n(()=>t[0]||(t[0]=[c(" Message information ")])),_:1,__:[0]}))})}}});
