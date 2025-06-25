@@ -13,10 +13,10 @@
 </ion-buttons>
 
 
-
 <ion-title>{{ title!=null?title:'FarmCare' }} </ion-title>
 <ion-buttons slot="end">
 <ion-button @click="router.push('/search')"> <ion-icon slot="end" :icon="search" color="dark"></ion-icon> </ion-button>
+<ion-button @click="router.push('/message')"> <ion-icon slot="end" :icon="mailOutline" color="dark"></ion-icon> </ion-button>
 <ion-button @click="router.push('/profile')"><ion-icon slot="end" :icon="personCircle" color="dark"></ion-icon> </ion-button>
 </ion-buttons>
 </ion-toolbar>
@@ -35,7 +35,7 @@
 
 <script setup>
 import { IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
-import { personCircle, search } from 'ionicons/icons';
+import { personCircle, search, mailOutline } from 'ionicons/icons';
 import { useRouter } from 'vue-router';
 
 

@@ -71,12 +71,10 @@
 
 Animal Health Report
 </ion-label>
-<ion-button v-if="row.report.length>0" color="dark">
+<ion-button v-if="row.report.length>0" color="dark" @click="router.push('/share/'+row.animal.id)">
 <span class="material-icons" >share</span>
 </ion-button>
 </ion-list-header>
-
-
 
 
 <ion-item v-for="(r,key) in row.report" :key="key" color="light" style="margin-top:3px;" lines="none">
@@ -140,15 +138,27 @@ Animal Health Report
 </ion-toolbar>
 </ion-header>
 <ion-content>
+
+
 <ion-list>
-<ion-list-header color="light">
+<ion-item detail="false" color="light" lines="none">
+<div class="unread-indicator-wrapper" slot="start"></div>
+<ion-avatar slot="start">
+<img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+</ion-avatar>
 <ion-label>
-<h4 style="font-size:18px;font-weight:bold;text-transform:capitalize"> {{ row.animal.name }}
-</h4>
+<strong style="font-size:25px;text-transform:capitalize">{{ row.animal.name }}</strong>
 </ion-label>
-<span style="font-size:14px;">Tag: {{  row.animal.tag }}</span>
-</ion-list-header>
+<div class="metadata-end-wrapper" slot="end">
+<ion-icon color="medium" :icon="pricetagSharp"></ion-icon>
+<ion-note color="medium">{{  row.animal.tag }}</ion-note>
+</div>
+</ion-item>
 </ion-list>
+
+
+
+
 
 
 <form style="padding:15px;" @submit.prevent="submit">
@@ -189,12 +199,12 @@ Animal Health Report
 </template>
 <script setup>
 import AppLayout from '@/components/AppLayout.vue';
-import { useRoute } from 'vue-router';
+import { useRoute,useRouter } from 'vue-router';
 import { reactive, onMounted, computed,ref } from 'vue';
 import {db} from '@/Database/database';
 import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle,IonItem, IonLabel, IonList, IonNote,IonListHeader, IonIcon, IonButton, IonFab, IonFabButton,
 IonButtons,IonModal, IonHeader, IonToolbar, IonContent, IonTitle,IonInput, IonSelect,IonSelectOption, IonBadge, IonAvatar   } from '@ionic/vue';
-import { ellipsisHorizontalCircleSharp, add, chevronForward } from 'ionicons/icons';
+import { ellipsisHorizontalCircleSharp, add, chevronForward,pricetagSharp } from 'ionicons/icons';
 
 
 const row=reactive({
@@ -204,7 +214,7 @@ report:[]
 });
 
 
-
+const router=useRouter();
 const route=useRoute();
 onMounted(()=>{
 let id=route.path.split('/');
@@ -272,7 +282,7 @@ let measure='';
 if(item==='animal temperature'){
 measure='Degrees';
 }else if(item==='heartbeat'){
-measure='Hbps';
+measure='BPM';
 }else if(item==='environmental temperature'){
 measure='Degrees';
 }

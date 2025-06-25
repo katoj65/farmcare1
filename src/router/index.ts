@@ -109,8 +109,17 @@ name:'reports'
 path:'/register',
 component:()=>import('@/views/Register.vue'),
 name:'register',
-
 },
+{
+  path:'/message',
+  component:()=>import('@/views/Message.vue'),
+  name:'message'
+},
+{
+  path:'/share/:id',
+  component:()=>import('@/views/ShareAnimalReport.vue'),
+  name:'share'
+  }
 
 
 
