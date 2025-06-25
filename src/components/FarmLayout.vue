@@ -97,8 +97,8 @@ Size: {{ f.size}} | {{ f.type }}
 <ion-note color="medium" class="ion-text-wrap">Size: {{ f.size}} | {{ f.type }}</ion-note>
 </ion-label>
 <div class="metadata-end-wrapper" slot="end">
-<ion-icon color="medium" :icon="call"></ion-icon> 
-<ion-note color="medium">0{{ f.tel }}</ion-note>
+<ion-icon color="medium" :icon="call"></ion-icon>
+<ion-note color="medium" style="padding-left:5px;">0{{ f.tel }}</ion-note>
 </div>
 </ion-item>
 

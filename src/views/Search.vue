@@ -10,6 +10,8 @@ IonAvatar  } from '@ionic/vue';
 import { chevronForward, listCircle,pricetag } from 'ionicons/icons';
 import { reactive, onMounted} from 'vue';
 import { db } from '@/Database/database';
+import { useRoute, useRouter } from 'vue-router';
+
 
 
 
@@ -25,6 +27,8 @@ status:null,
 
 
 
+
+const router=useRouter();
 
 
 const submit = async ()=>{
@@ -60,7 +64,7 @@ console.log(res.error);
 
 <ion-list v-if="row.status>0">
 
-<ion-item :button="true" detail="false" v-for="(i,key) in row.search" :key="key">
+<ion-item :button="true" detail="false" v-for="(i,key) in row.search" :key="key" lines="full" @click="router.push('/animal/'+i.id)">
 <ion-avatar slot="start">
 <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
 </ion-avatar>
@@ -76,8 +80,6 @@ console.log(res.error);
 <ion-note color="medium" style="padding-left:5px;"> {{ i.tag }} </ion-note>
 </div>
 </ion-item>
-
-
 
 
 </ion-list>

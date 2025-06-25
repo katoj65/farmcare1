@@ -69,40 +69,37 @@
 <ion-list-header color="light">
 <ion-label style="font-weight:bold;">
 
-    Animal Health Report</ion-label>
-    <ion-button v-if="row.report.length>0" color="dark">
-        <span class="material-icons" >share</span>
-    </ion-button>
+Animal Health Report
+</ion-label>
+<ion-button v-if="row.report.length>0" color="dark">
+<span class="material-icons" >share</span>
+</ion-button>
 </ion-list-header>
 
 
 
 
 <ion-item v-for="(r,key) in row.report" :key="key" color="light" style="margin-top:3px;" lines="none">
-<ion-label style="text-transform:capitalize">
-{{ r.type }}
+<ion-label>
+<strong style="text-transform:capitalize"> {{ r.type }}</strong>
+<ion-note color="medium" class="ion-text-wrap">
+<p v-for="(x,key) in doctor(r.type,r.description)" :key="key" style="padding-top:10px;">
+{{ x.action }}
+</p>
+</ion-note>
 </ion-label>
+<div class="metadata-end-wrapper" slot="end">
 <ion-note color="medium" style="font-size:15px;">
 {{ r.description }} {{ measurements(r.type) }}
 </ion-note>
-</ion-item>
-
-
-
-
-<div v-if="row.report.length>0" style="margin-top:5px;border:solid thin #e5e8e8;margin:10px;border-radius:5px;">
-<ion-item lines="none">
-<h6 style="font-weight:bold;">Recommendations</h6>
-</ion-item>
-<ion-list v-for="(r,key) in row.report" :key="key">
-<ion-item v-for="(x,key) in doctor(r.type,r.description)" :key="key" lines="none">
-<ion-icon :icon="chevronForward" ></ion-icon>
-<ion-label>{{ x.action }}</ion-label>
-</ion-item>
-</ion-list>
-
-
 </div>
+
+
+
+</ion-item>
+
+
+
 
 
 
