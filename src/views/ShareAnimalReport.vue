@@ -25,7 +25,7 @@
 
 
 
-<ion-item :button="true" detail="false" v-for="(p,key) in row.workers" :key="key" lines="none" style="border:solid thin #e5e8e8 ;margin-top:5px;margin:5px;" @click="router.push('/animal/'+row.animal.id)">
+<ion-item :button="true" detail="false" v-for="(p,key) in row.workers" :key="key" lines="none" style="border:solid thin #e5e8e8 ;margin-top:5px;margin:5px;" @click="submit(p)">
 <ion-avatar slot="start">
 <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
 </ion-avatar>
@@ -34,7 +34,7 @@
 {{ p.firstname }} {{ p.lastname }}<br/>
 </strong>
 <ion-note color="medium" class="ion-text-wrap">
-{{ p.role }} . {{ p.tel }}
+{{ p.role }} . 0{{ p.tel }}
 </ion-note>
 </ion-label>
 <div class="metadata-end-wrapper" slot="end">
@@ -85,6 +85,7 @@ workers:[]
 
 const router=useRouter();
 const route=useRoute();
+
 onMounted(()=>{
 let id=route.path.split('/');
 db.from('animal')
@@ -100,7 +101,6 @@ db.from('worker')
 .select("*")
 .eq('farm_id',element.farm.id)
 .then((res)=>{
-console.log(res);
 if(res.error==null){
 row.workers=res.data;
 }else{
@@ -109,19 +109,7 @@ console.log(res.error);
 })
 .catch((error)=>{console.log(error)});
 
-
-
-
-
-
-
 });
-
-
-
-
-
-
 
 }else{
 console.log(response.error);
@@ -130,16 +118,6 @@ console.log(response.error);
 })
 .catch((error)=>{console.log(error)});
 });
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -160,7 +138,32 @@ error:null,
 
 
 
+const submit= async (user)=>{
+const animalID=row.animal.id;
+const report=await db.from('animal_report')
+.select("*")
+.eq('animal_id',animalID);
+const obj={ ...report.data};
+if(report.error==null){
 
+const insert= await db.from('message')
+.insert([{
+animal_id: animalID,
+worker_id: user.id,
+message:obj
+
+},
+])
+.select();
+router.push('/animal/'+animalID);
+
+}else{
+console.log(report.error);
+}
+
+
+
+}
 
 
 
