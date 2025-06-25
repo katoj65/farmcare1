@@ -20,10 +20,6 @@
 
 
 
-
-
-
-
 </ion-list>
 </div>
 </farm-layout>
