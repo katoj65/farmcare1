@@ -7,7 +7,7 @@
 <ion-label>Farm inventory </ion-label>
 </ion-list-header>
 
-<ion-item :button="true" v-for="(i,key) in row.inventory" :key="key" lines="full">
+<ion-item v-for="(i,key) in row.inventory" :key="key" lines="full">
 <ion-icon color="secondary" slot="start" :icon="listCircle" size="large"></ion-icon>
 <ion-label>
 {{ i.item }}

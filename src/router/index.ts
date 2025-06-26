@@ -134,6 +134,11 @@ name:'add inventory'
 path:'/farm/inventory/:id',
 component:()=>import('@/views/FarmInventory.vue'),
 name:'inventory'
+},
+{
+path:'/inventory',
+component:()=>import('@/views/Inventory.vue'),
+name:'inventory'
 }
 
 

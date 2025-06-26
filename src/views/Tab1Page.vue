@@ -12,7 +12,7 @@ const menu=[
 {title:'Farm',icon:leaf,url:'/farm'},
 {title:'Employees',icon:people,url:'/employees'},
 {title:'Reports',icon:documentText,url:'/reports'},
-{title:'Inventory',icon:briefcase,url:'/'},
+{title:'Inventory',icon:briefcase,url:'/inventory'},
 {title:'Veterinary',icon:fitness,url:'/'},
 {title:'Diseases',icon:bug,url:'/'},
 
