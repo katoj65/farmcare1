@@ -4,7 +4,7 @@
 <ion-list>
 
 <ion-list-header color="light">
-<ion-label>Farm inventory </ion-label>
+<ion-label>Farm invetory </ion-label>
 </ion-list-header>
 
 <ion-item v-for="(i,key) in row.inventory" :key="key" lines="full">

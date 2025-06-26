@@ -20,7 +20,7 @@
 </ion-item>
 
 <ion-item>
-<ion-input  placeholder="Enter password" v-model="form.password"></ion-input>
+<ion-input  placeholder="Enter password" v-model="form.password" type="password"></ion-input>
 </ion-item>
 
 <ion-item lines="none">
