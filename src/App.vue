@@ -36,33 +36,33 @@ store.state.user=null;
 
 
 
-let deferredPrompt = null;
-onMounted(()=>{
-window.addEventListener('beforeinstallprompt', (e) => {
-e.preventDefault();
-deferredPrompt = e;
-console.log('PWA install prompt is ready')
-});
+// let deferredPrompt = null;
+// onMounted(()=>{
+// window.addEventListener('beforeinstallprompt', (e) => {
+// e.preventDefault();
+// deferredPrompt = e;
+// console.log('PWA install prompt is ready')
+// });
 
 
-triggerInstall();
-});
+// triggerInstall();
+// });
 
-function triggerInstall() {
-  if (deferredPrompt) {
-    deferredPrompt.prompt()
-    deferredPrompt.userChoice.then((result) => {
-      if (result.outcome === 'accepted') {
-        console.log('App installed!')
-      } else {
-        console.log('App install dismissed')
-      }
-      deferredPrompt = null
-    })
-  } else {
-    alert('Install not available yet. Try refreshing.')
-  }
-}
+// function triggerInstall() {
+//   if (deferredPrompt) {
+//     deferredPrompt.prompt()
+//     deferredPrompt.userChoice.then((result) => {
+//       if (result.outcome === 'accepted') {
+//         console.log('App installed!')
+//       } else {
+//         console.log('App install dismissed')
+//       }
+//       deferredPrompt = null
+//     })
+//   } else {
+//     alert('Install not available yet. Try refreshing.')
+//   }
+// }
 
 
 

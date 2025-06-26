@@ -151,13 +151,19 @@ console.log(res.error);
 </script>
 <template>
 <app-layout title="Diseases Details" back="/disease">
+
+
+
+
 <div v-if="row.disease!=null">
 <ion-list>
-<ion-item color="light" lines="full">
+<ion-item color="light" lines="none">
 <ion-label>
-<strong style="">{{ row.disease.name }} </strong><br/>
+<strong style="text-transform:capitalize">{{ row.disease.name }} </strong><br/>
 <ion-note color="medium" class="ion-text-wrap">
+<div style="padding-top:10px;">
 {{ row.disease.description }}
+</div>
 </ion-note>
 </ion-label>
 <div class="metadata-end-wrapper" slot="end" @click="open2=true">
@@ -196,6 +202,7 @@ Treatment
 
 
 <ion-item  detail="false" v-for="(t,key) in row.treatment" :key="key" lines="full">
+<ion-icon :icon="heartCircleOutline" slot="start"></ion-icon>
 <ion-label>
 <strong style="text-transform:capitalize;">
 {{ t.name }}
@@ -206,7 +213,7 @@ Treatment
 </ion-note>
 </ion-label>
 <div class="metadata-end-wrapper" slot="end">
-<ion-icon color="medium" :icon="heartCircleOutline"></ion-icon>
+<!-- <ion-icon color="medium" :icon="heartCircleOutline"></ion-icon> -->
 <!-- <ion-note color="medium">Yesterday</ion-note> -->
 </div>
 </ion-item>
@@ -228,7 +235,7 @@ Treatment
 
 
 
-<ion-modal :is-open="open">
+<ion-modal :is-open="open" v-if="route.name=='disease show'">
 <ion-header>
 <ion-toolbar>
 <ion-title>Add symptoms</ion-title>
@@ -278,7 +285,7 @@ Treatment
 
 
 
-<ion-modal :is-open="open2">
+<ion-modal :is-open="open2" v-if="route.name=='disease show'">
 <ion-header>
 <ion-toolbar>
 <ion-title>Add treatment</ion-title>

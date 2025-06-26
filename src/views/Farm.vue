@@ -43,7 +43,7 @@ data.farm=response.data;
 <template>
 <app-layout title="Farm" back="/">
 
-<ion-item detail="true" v-for="(f,key) in data.farm" :key="key" @click="router.push('/farm/show/'+f.id)" lines="full" button="">
+<ion-item detail="true" v-for="(f,key) in data.farm" :key="key" @click="router.push('/farm/show/'+f.id)" lines="full" button>
 <ion-avatar slot="start">
 <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
 </ion-avatar>

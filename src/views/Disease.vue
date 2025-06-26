@@ -28,7 +28,7 @@ const open=ref(false);
 
 
 
-
+const route=useRoute();
 const router=useRouter();
 onMounted(async ()=>{
 const res=await db.
@@ -87,7 +87,7 @@ console.log(error);
 <ion-list>
 <ion-item v-for="(d,key) in row.disease" :key="key" lines="full" details="true" button @click="router.push('/disease/show/'+d.id)">
 <ion-label>
-<h3>{{ d.name }} </h3>
+<h3 style="font-weight:bolder;text-transform:capitalize;">{{ d.name }} </h3>
 <p>
 {{ d.description }}
 </p>
@@ -118,7 +118,7 @@ console.log(error);
 
 
 
-<ion-modal :is-open="open">
+<ion-modal :is-open="open" v-if="route.name=='disease'">
 <ion-header>
 <ion-toolbar>
 <ion-title>Add disease details</ion-title>
