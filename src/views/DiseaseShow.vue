@@ -50,6 +50,8 @@ from('symptom')
 .eq('disease_id', row.disease.id)
 if(symp.error==null){
 row.symptom=symp.data;
+form.name='';
+form.description='';
 }else{
 console.log(symp.error);
 }
@@ -61,6 +63,8 @@ from('treatment')
 .eq('disease_id',id[3]);
 if(treatment.error==null){
 row.treatment=treatment.data;
+form2.name='';
+form2.description='';
 }else{
 console.log(treatment.error);
 }
