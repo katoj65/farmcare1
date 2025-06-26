@@ -1,18 +1,18 @@
+// build.gradle (corrected with Maven dependencies only)
+
 apply plugin: 'com.android.application'
-// apply plugin: 'org.jetbrains.kotlin.android' // Uncomment if using Kotlin
 
 android {
     namespace "io.ionic.starter"
-    compileSdk 34
+    compileSdkVersion 34
 
     defaultConfig {
         applicationId "io.ionic.starter"
-        minSdk 24
-        targetSdk 34
+        minSdkVersion 24
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
         aaptOptions {
             ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
@@ -21,7 +21,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
@@ -32,17 +32,20 @@ repositories {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "androidx.appcompat:appcompat:1.7.0"
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "androidx.appcompat:appcompat:1.6.1"
     implementation "androidx.coordinatorlayout:coordinatorlayout:1.2.0"
     implementation "androidx.core:core-splashscreen:1.0.1"
+    implementation "androidx.core:core:1.15.0"
+    implementation "androidx.activity:activity:1.9.2"
+    implementation "androidx.fragment:fragment:1.8.0"
+    implementation "androidx.webkit:webkit:1.12.1"
+    implementation project(':capacitor-android')
+    implementation project(':capacitor-cordova-android-plugins')
 
     testImplementation "junit:junit:4.13.2"
     androidTestImplementation "androidx.test.ext:junit:1.1.5"
     androidTestImplementation "androidx.test.espresso:espresso-core:3.5.1"
-
-    implementation project(':capacitor-android')
-    implementation project(':capacitor-cordova-android-plugins')
 }
 
 apply from: 'capacitor.build.gradle'
