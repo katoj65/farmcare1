@@ -13,8 +13,8 @@ const menu=[
 {title:'Employees',icon:people,url:'/employees'},
 {title:'Reports',icon:documentText,url:'/reports'},
 {title:'Inventory',icon:briefcase,url:'/inventory'},
-{title:'Veterinary',icon:fitness,url:'/'},
-{title:'Diseases',icon:bug,url:'/'},
+{title:'Veterinary',icon:fitness,url:'/veterinary'},
+{title:'Diseases',icon:bug,url:'/disease'},
 
 ];
 

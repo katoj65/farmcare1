@@ -42,7 +42,7 @@ console.log(response.error);
 <h3 style="text-transform:capitalize;font-weight:bold;font-size:17px;">
 {{ a.firstname }} {{ a.lastname }} </h3>
 <p style="text-transform:capitalize">
-{{ a.gender }} . 0{{ a.farm.name }} . {{ a.role }}
+{{ a.gender }} . {{ a.farm.name }} . {{ a.role }}
 </p>
 </ion-label>
 </ion-item>

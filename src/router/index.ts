@@ -139,7 +139,25 @@ name:'inventory'
 path:'/inventory',
 component:()=>import('@/views/Inventory.vue'),
 name:'inventory'
+},
+{
+path:'/veterinary',
+component:()=>import('@/views/Veterinary.vue'),
+name:'veterinary'
+},
+{
+path:'/disease',
+component:()=>import('@/views/Disease.vue'),
+name:'disease'
+},
+{
+path:'/disease/show/:id',
+component:()=>import('@/views/DiseaseShow.vue'),
+name:'disease show'
 }
+
+
+
 
 
 

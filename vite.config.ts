@@ -20,7 +20,7 @@ export default defineConfig({
         start_url: 'https://katoj65.github.io/farmcare1/',
         display: 'standalone',
         background_color: '#ffffff',
-        theme_color: '#fffff',
+        theme_color: '#ffffff',
         icons: [
           {
             src: 'icons/pwa-192x192.png',

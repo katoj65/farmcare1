@@ -54,8 +54,6 @@ console.log(res.error);
 </div>
 </ion-item>
 
-
-
 </ion-list>
 </app-layout>
 </template>
