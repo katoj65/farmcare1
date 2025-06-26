@@ -1,23 +1,59 @@
-<template>
-  <ion-page>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Tab 3</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Tab 3</ion-title>
-        </ion-toolbar>
-      </ion-header>
+<script setup>
+import AppLayout from '@/components/AppLayout.vue';
+import { db } from '@/Database/database';
+import { onMounted, reactive } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import {store} from '@/store/Index';
+import {
+    IonIcon,
+    IonItem,
+    IonLabel,
+    IonList,
+    IonNote,
+    IonText,
+  } from '@ionic/vue';
+  import { chevronForward, listCircle } from 'ionicons/icons';
 
-      <ExploreContainer name="Tab 3 page" />
-    </ion-content>
-  </ion-page>
-</template>
+const row=reactive({
+inventory:[]
+});
 
-<script setup >
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
-import ExploreContainer from '@/components/ExploreContainer.vue';
+
+
+
+onMounted(async ()=>{
+const res=await db.
+from('inventory')
+.select("*,farm(*)")
+.eq('farm.user_email',store.state.user)
+if(res.error==null){
+row.inventory=res.data;
+}else{
+console.log(res.error);
+}
+});
+
+
 </script>
+<template>
+<app-layout title="Inventory" back="/">
+<ion-list>
+
+<ion-item detail="false" lines="full" v-for="(m,key) in row.inventory" :key="key">
+<ion-label>
+<strong>{{ m.farm.name }} Inventory</strong><br/>
+<ion-note color="medium" class="ion-text-wrap" style="text-transform:capitalize">
+{{ m.item }}
+</ion-note>
+</ion-label>
+<div class="metadata-end-wrapper" slot="end">
+<ion-note color="medium">
+{{ m.quantity }}
+</ion-note>
+<!-- <ion-icon color="medium" :icon="chevronForward"></ion-icon> -->
+</div>
+</ion-item>
+
+</ion-list>
+</app-layout>
+</template>
