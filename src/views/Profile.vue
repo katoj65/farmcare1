@@ -1,12 +1,12 @@
 <template>
 <app-layout title="My Profile">
 
-<div  v-for="(r,key) in data.profile" :key="key">
+<div v-if="data.profile!=null" style="padding-bottom:100px;">
 <ion-item>
 <ion-label>
 <h3>Names</h3>
 <p>
-{{ r.firstname }} {{ r.lastname }}
+{{ data.profile.first_name}} {{ data.profile.last_name }}
 </p>
 </ion-label>
 </ion-item>
@@ -17,7 +17,7 @@
 <ion-label>
 <h3>Email</h3>
 <p>
-{{ r.email }}
+{{ data.profile.email }}
 </p>
 </ion-label>
 </ion-item>
@@ -27,7 +27,7 @@
 <ion-label>
 <h3>Telephone</h3>
 <p>
-{{ r.tel }}
+{{ data.profile.tel }}
 </p>
 </ion-label>
 </ion-item>
@@ -56,16 +56,14 @@ profile:null,
 
 
 onMounted(async ()=>{
-db.from('profile')
-.select("*")
-.eq('email',store.state.user)
-.then((response)=>{
-if(response.error==null){
-data.profile=response.data;
+const user=await db.
+auth.getSession();
+if(user.error==null){
+const session=user.data.session.user.user_metadata;
+data.profile=session;
+}else{
+console.log(user.error);
 }
-})
-.catch((error)=>{
-console.log(error)});
 });
 
 
