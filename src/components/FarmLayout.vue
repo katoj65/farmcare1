@@ -14,7 +14,7 @@ chevronUpCircle,
 people,chevronForward,
 call
 } from 'ionicons/icons';
-import { computed, onMounted, reactive } from 'vue';
+import { computed, onMounted, reactive,ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { store } from '@/store/Index';
 
@@ -22,6 +22,8 @@ import { store } from '@/store/Index';
 const data=reactive({
 farm:[]
 });
+
+
 
 const route=useRoute();
 const id=route.path.split('/');
@@ -54,15 +56,44 @@ return items;
 });
 
 
+
+
+const farm_details=ref({});
+const role=ref('');
 onMounted(async ()=>{
+const session=await db.auth.getSession();
+if(session.error==null){
+const user_email=session.data.session.user.user_metadata.email;
+const user_tel=session.data.session.user.user_metadata.tel;
+
+console.log(user_tel);
 const farm=await db.from('farm')
-.select("*")
-.eq('id',id[3]);
+.select("*,worker(*)")
+.eq('id',id[3])
+.eq('worker.tel',user_tel);
+if(farm.error==null){
 
-console.log(farm);
+farm.data.forEach(element => {
+farm_details.value=element.worker;
+
+});
+
+//check your role
+const femail=farm_details.value.user_email;
+if(femail==store.state.user){
+return;
+}else{
+
+}
 
 
 
+}else{
+console.log(session.error);
+}
+
+
+}
 });
 
 
@@ -76,6 +107,9 @@ console.log(farm);
 <app-layout back="/farm" title="Farm details">
 
 <div  v-for="(f,key) in data.farm" :key="key">
+
+
+
 
 
 <!-- <ion-card color="light" style="box-shadow:none;border:solid thin #e5e8e8;">
@@ -121,6 +155,8 @@ Size: {{ f.size}} | {{ f.type }}
 
 
 </div>
+
+
 <ion-fab slot="fixed" vertical="bottom" horizontal="end">
 <ion-fab-button color="dark">
 <ion-icon :icon="chevronUpCircle"></ion-icon>
