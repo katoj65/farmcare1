@@ -83,8 +83,7 @@ from('inventory')
 form.id='';
 form.item='';
 form.quantity='';
-
-console.log(res);
+router.push('/farm/show/'+form.id);
 
 }
 }
