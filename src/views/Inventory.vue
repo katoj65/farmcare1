@@ -41,7 +41,7 @@ console.log(res.error);
 
 <ion-item detail="false" lines="full" v-for="(m,key) in row.inventory" :key="key">
 <ion-label>
-<strong>{{ m.farm.name }} Inventory</strong><br/>
+<strong>Inventory</strong><br/>
 <ion-note color="medium" class="ion-text-wrap" style="text-transform:capitalize">
 {{ m.item }}
 </ion-note>
