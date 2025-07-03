@@ -95,13 +95,16 @@ description:''
 });
 
 const submit= async ()=>{
-if(form.name=='' || form.description==''){
+if(form.name==''){
 message.error='Fill in all fields';
 }else{
 
 const res=await db.
 from('symptom')
-.insert([{ name:form.name,description:form.description,disease_id:row.disease.id}]).select();
+.insert([{ name:form.name,
+disease_id:row.disease.id}])
+.select();
+
 if(res.error==null){
 res.data.forEach(element=>{
 row.symptom.push(element);
@@ -238,7 +241,7 @@ Treatment
 <ion-modal :is-open="open" v-if="route.name=='disease show'">
 <ion-header>
 <ion-toolbar>
-<ion-title>Add symptoms</ion-title>
+<ion-title>Add signs and symptoms</ion-title>
 <ion-buttons slot="end">
 <ion-button @click="open=false">Close</ion-button>
 </ion-buttons>
@@ -251,11 +254,7 @@ Treatment
 </div>
 <ion-list style="border:solid thin #e5e8e8;border-radius:10px;padding:10px;">
 <ion-item>
-<ion-input  placeholder="Enter symptom" v-model="form.name"></ion-input>
-</ion-item>
-
-<ion-item>
-<ion-textarea  placeholder="Enter symptom description" v-model="form.description"></ion-textarea>
+<ion-textarea  placeholder="Enter signs and symptoms" v-model="form.name"></ion-textarea>
 </ion-item>
 <ion-item lines="none">
 <ion-button expand="block" style="width:100%;margin-top:20px;" class="ion-button" size="default" type="submit" >Save</ion-button>

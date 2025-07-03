@@ -16,13 +16,15 @@ call
 } from 'ionicons/icons';
 import { computed, onMounted, reactive } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-
+import { store } from '@/store/Index';
 
 
 const data=reactive({
 farm:[]
 });
+
 const route=useRoute();
+const id=route.path.split('/');
 onMounted(()=>{
 let id=route.path.split('/');
 console.log(id[3]);
@@ -42,9 +44,6 @@ console.log(response.error);
 });
 
 const router=useRouter();
-
-
-
 const farmDetails=computed(()=>{
 const farm=data.farm;
 let items='';
@@ -55,14 +54,20 @@ return items;
 });
 
 
+onMounted(async ()=>{
+const farm=await db.from('farm')
+.select("*")
+.eq('id',id[3]);
 
-// onMounted(()=>{
+console.log(farm);
+
+
+
+});
 
 
 
 
-
-// });
 
 
 

@@ -28,11 +28,12 @@ import { ellipsisHorizontalCircleSharp,add } from 'ionicons/icons';
 import { reactive, onMounted } from 'vue';
 import {db} from '@/Database/database';
 import { useRoute, useRouter } from 'vue-router';
+import { store } from '@/store/Index';
+
 
 const row=reactive({
 animal:[],
 });
-
 
 
 
@@ -46,6 +47,7 @@ db.from('animal')
 .then((response)=>{
 if(response.error==null){
 row.animal=response.data;
+
 }else{
 console.log(response.error);
 }

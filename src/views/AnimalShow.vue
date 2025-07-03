@@ -123,11 +123,6 @@ Animal Health Report
 </ion-fab>
 
 
-
-
-
-
-
 <ion-modal :is-open="isOpen" v-if="route.name=='animal details'">
 <ion-header>
 <ion-toolbar>

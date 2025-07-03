@@ -118,6 +118,14 @@ role:form.role
 .then((response)=>{
 if(response.error==null){
 response.data.forEach(element => {
+form={
+firstname:'',
+lastname:'',
+gender:'',
+age:'',
+tel:'',
+role:''
+}
 router.push('/worker/show/'+element.id);
 });
 
