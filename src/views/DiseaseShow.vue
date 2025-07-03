@@ -187,9 +187,8 @@ Symptoms
 <ion-item :button="true" detail="false" lines="full" v-for="(s,key) in row.symptom" :key="key">
 <ion-icon :icon="informationCircle" slot="start"></ion-icon>
 <ion-label>
-<strong style="text-transform:capitalize;">
 {{ s.name }}
-</strong><br/>
+<br/>
 <ion-note color="medium" class="ion-text-wrap">
 {{ s.description }}
 </ion-note>
@@ -197,20 +196,22 @@ Symptoms
 </ion-item>
 <ion-list-header color="light">
 <ion-label>
-Treatment
+Prevention
 </ion-label>
 </ion-list-header>
-
-
-
 
 <ion-item  detail="false" v-for="(t,key) in row.treatment" :key="key" lines="full">
 <ion-icon :icon="heartCircleOutline" slot="start"></ion-icon>
 <ion-label>
-<strong style="text-transform:capitalize;">
+<div>
 {{ t.name }}
-</strong>
+</div>
 <br/>
+<div>
+<strong style="font-size:23px;">
+Treatment
+</strong>
+</div><br/>
 <ion-note color="medium" class="ion-text-wrap">
   {{ t.description }}
 </ion-note>
