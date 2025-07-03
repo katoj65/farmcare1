@@ -41,12 +41,15 @@ tel:form.tel,
 type:form.type,
 tel:form.contact,
 size:form.size
-
 }])
 .select()
 .then((response)=>{
 if(response.error==null){
-router.push('/farm');
+console.log(response.data);
+response.data.forEach((element)=>{
+router.push('/farm/show/'+element.id);
+});
+
 }
 })
 .catch((error)=>{console.log(error)});

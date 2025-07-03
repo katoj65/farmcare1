@@ -9,28 +9,69 @@ import {store} from '@/store/Index';
 
 
 
-
-
-
 const router=useRouter();
 const data=reactive({
 farm:'',
+
 });
 
 
-onMounted(()=>{
-db.from('farm')
+onMounted(async ()=>{
+const farm=await db.from('farm')
 .select("*")
-.eq('user_email',store.state.user)
-.then((response)=>{
-if(response.error==null){
-// console.log(response.data);
-data.farm=response.data;
+.eq('user_email',store.state.user);
+if(farm.error==null){
+data.farm=farm.data;
+}else{
+console.log(farm.error);
 }
-})
-.catch((error)=>{console.log(error)})
+
+//get session
+const user=await db.auth.getSession();
+if(user.error==null){
+const userdata=user.data.session.user.user_metadata;
+const tel=userdata.tel;
+
+const worker=await db.from('worker')
+.select("*")
+.eq('tel',tel);
+
+
+
+
+
+
+
+
+
+
+}else{
+console.log(user.error);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 });
+
+
+
+
+
 
 
 
@@ -42,7 +83,7 @@ data.farm=response.data;
 </script>
 <template>
 <app-layout title="Farm" back="/">
-
+<div v-if="data.farm.length>0">
 <ion-item detail="true" v-for="(f,key) in data.farm" :key="key" @click="router.push('/farm/show/'+f.id)" lines="full" button>
 <ion-avatar slot="start">
 <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
@@ -56,6 +97,12 @@ data.farm=response.data;
 </p>
 </ion-label>
 </ion-item>
+</div>
+
+
+
+
+
 
 
 
