@@ -287,7 +287,7 @@ Treatment
 <ion-modal :is-open="open2" v-if="route.name=='disease show'">
 <ion-header>
 <ion-toolbar>
-<ion-title>Add treatment</ion-title>
+<ion-title>Add prevention and treatment</ion-title>
 <ion-buttons slot="end">
 <ion-button @click="open2=false">Close</ion-button>
 </ion-buttons>
@@ -300,11 +300,11 @@ Treatment
 </div>
 <ion-list style="border:solid thin #e5e8e8;border-radius:10px;padding:10px;">
 <ion-item>
-<ion-input  placeholder="Enter treatment" v-model="form2.name"></ion-input>
+<ion-input  placeholder="Enter prevention" v-model="form2.name"></ion-input>
 </ion-item>
 
 <ion-item>
-<ion-textarea  placeholder="Enter treatment description" v-model="form2.description"></ion-textarea>
+<ion-textarea  placeholder="Enter treatment" v-model="form2.description"></ion-textarea>
 </ion-item>
 <ion-item lines="none">
 <ion-button expand="block" style="width:100%;margin-top:20px;" class="ion-button" size="default" type="submit" >Save</ion-button>
