@@ -74,6 +74,7 @@ const logout =()=>{
 store.state.user='';
 db.auth.signOut();
 router.push('/');
+window.location.href = "/";
 }
 
 
