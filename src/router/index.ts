@@ -154,7 +154,13 @@ name:'disease'
 path:'/disease/show/:id',
 component:()=>import('@/views/DiseaseShow.vue'),
 name:'disease show'
+},
+{
+path:'/login',
+component:()=>import('@/views/Login.vue'),
+name:'login'
 }
+
 
 
 

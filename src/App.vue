@@ -1,7 +1,7 @@
 <template>
 <ion-app>
 <login v-if="store.state.user==null"/>
-<ion-router-outlet v-else/>
+<ion-router-outlet v-else-if="store.state.user!=null && store.state.user!=''"/>
 </ion-app>
 </template>
 
@@ -23,7 +23,7 @@ onBeforeMount(()=>{
 db.auth.getSession().then((response)=>{
 if(response.data.session!=null){
 store.state.user=response.data.session.user.email;
-// console.log(store.state.user);
+console.log(store.state.user);
 }else{
 store.state.user=null;
 }

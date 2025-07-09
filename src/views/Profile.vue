@@ -35,6 +35,12 @@
 <ion-item button @click="logout">
 <ion-label>Logout</ion-label>
 </ion-item>
+
+
+
+
+
+
 </div>
 </app-layout>
 </template>
@@ -58,6 +64,7 @@ profile:null,
 onMounted(async ()=>{
 const user=await db.
 auth.getSession();
+console.log(user);
 if(user.error==null){
 const session=user.data.session.user.user_metadata;
 data.profile=session;
@@ -70,11 +77,11 @@ console.log(user.error);
 
 
 const router=useRouter();
-const logout =()=>{
-store.state.user='';
-db.auth.signOut();
-router.push('/');
-window.location.href = "/";
+const logout =async ()=>{
+const { data, error } = await db.auth.signOut();
+store.state.user=null;
+router.push('/login');
+
 }
 
 

@@ -1,42 +1,6 @@
 <template>
 <ion-page>
-<ion-content :fullscreen="true" class="ion-padding" style="text-align:center">
-
-<h1>
-<ion-icon :icon="logoIonic" size="large"  color="secondary"></ion-icon>
-</h1>
-<h4>Farm Care</h4>
-<p>Sign Up</p>
-
-
-
-<form @submit.prevent="submit" style="margin-top:30px;">
-<div style="color:red;" v-if="message.error!=''">
-{{ message.error }}
-</div>
-<ion-list>
-
-
-
-
-<ion-item>
-<ion-input label="Email" placeholder="Enter email" v-model="form.email"></ion-input>
-</ion-item>
-
-<ion-item>
-<ion-input label="Password" placeholder="Password" v-model="form.password"></ion-input>
-</ion-item>
-
-<ion-item lines="none">
-<ion-button expand="block" style="width:100%;margin-top:20px;" class="ion-button" size="default" type="submit">Register</ion-button>
-</ion-item>
-</ion-list>
-</form>
-
-<ion-item lines="none">
-    <ion-button expand="block" style="width:100%;margin-top:20px;" class="ion-button" size="default" type="submit" color="light" @click="router.push('/')">Login</ion-button>
-    </ion-item>
-</ion-content>
+<login/>
 </ion-page>
 </template>
 
@@ -47,7 +11,7 @@ import { IonButton, IonContent, IonIcon, IonInput, IonItem, IonList, IonPage } f
 import { logoIonic } from 'ionicons/icons';
 import { reactive } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-
+import Login from '@/components/Login.vue';
 
 
 
