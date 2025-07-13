@@ -63,9 +63,9 @@ console.log(error)
 });
 
 const parameters=ref([
-{ name: 'Animal temperature'},
-{ name: 'Heartbeat'},
-{ name: 'Environment temperature'},
+{ name: 'animal temperature'},
+{ name: 'heartbeat'},
+{ name: 'environment temperature'},
 
 ]);
 

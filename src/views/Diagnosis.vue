@@ -45,7 +45,7 @@ import { db } from '@/Database/database';
 const router=useRouter();
 const diagnosis=ref([]);
 onMounted(async ()=>{
-const {data,error}=await db.from('parameters').select('*,disease(*,symptom(*),treatment(*))');
+const {data,error}=await db.from('parameters').select('*, disease(*, symptom(*),treatment(*))');
 if(error==null){
 diagnosis.value=data;
 }else{

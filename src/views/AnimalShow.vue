@@ -91,23 +91,43 @@ Animal Health Report
 {{ r.description }} {{ measurements(r.type) }}
 </ion-note>
 </div>
-
-
-
 </ion-item>
-
-
-
-
-
-
-
-
-
-
-
-
 </ion-list>
+
+
+<ion-list v-if="row.diagnosis.length>0">
+<ion-list-header color="light" style="margin-top:5px;">
+<ion-label style="font-weight:bold;">
+Diagnosis
+</ion-label>
+</ion-list-header>
+
+
+<ion-item v-for="(d,key) in row.diagnosis" :key="key" lines="full">
+<ion-label>
+<h4>
+{{ d.disease.name }}
+</h4>
+<div style="padding-top:15px;">
+<h4 style="font-weight:bold;">
+Symptoms
+</h4>
+<p>
+{{ d.disease.symptom.map(s => s.name).join(', ') }}
+</p>
+</div>
+<div style="padding-top:15px;">
+<h4 style="font-weight:bold;">
+Treatment
+</h4>
+<p>
+{{ d.disease.treatment.map(t => t.name).join(', ') }}
+</p>
+</div>
+</ion-label>
+</ion-item>
+</ion-list>
+
 </div>
 
 
@@ -198,14 +218,15 @@ import { useRoute,useRouter } from 'vue-router';
 import { reactive, onMounted, computed,ref } from 'vue';
 import {db} from '@/Database/database';
 import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle,IonItem, IonLabel, IonList, IonNote,IonListHeader, IonIcon, IonButton, IonFab, IonFabButton,
-IonButtons,IonModal, IonHeader, IonToolbar, IonContent, IonTitle,IonInput, IonSelect,IonSelectOption, IonBadge, IonAvatar   } from '@ionic/vue';
+IonButtons,IonModal, IonHeader, IonToolbar, IonContent, IonTitle,IonInput, IonSelect,IonSelectOption, IonBadge, IonAvatar  } from '@ionic/vue';
 import { ellipsisHorizontalCircleSharp, add, chevronForward,pricetagSharp } from 'ionicons/icons';
 
 
 const row=reactive({
 animal:'',
 back:'',
-report:[]
+report:[],
+diagnosis:[]
 });
 
 
@@ -219,6 +240,7 @@ db.from('animal')
 .then((response)=>{
 if(response.error==null){
 // row.animal=response.data;
+
 response.data.forEach(element => {
 row.animal=element
 row.back='/farm/show/'+element.farm.id;
@@ -232,6 +254,30 @@ db.from('animal_report')
 .then((response)=>{
 if(response.error==null){
 row.report=response.data;
+// get potential disease
+
+response.data.forEach(element => {
+// console.log(element);
+db.from('parameters')
+.select('*,disease(*,symptom(*),treatment(*))')
+.eq('attribute',element.type)
+.gte('minimum',element.description)
+.then((res)=>{
+if(res.error==null){
+res.data.forEach(element => {
+row.diagnosis.push(element);
+});
+
+console.log(row.diagnosis);
+
+
+}else{
+console.log(res.error);
+}
+}).catch((err)=>console.log(err));
+});
+
+
 }else{
 console.log(response.error);
 }
@@ -373,6 +419,25 @@ return response;
 
 
 
+
+
+//diagnosis
+const diagnosis=(param)=>{
+const {data,error}=db.from('parameters')
+.select('*,disease(*,symptom(*),treatment(*))')
+.eq('attribute',param.type)
+.gte('minimum',param.description);
+// let  response='';
+// if(error==null){
+// data.forEach(element => {
+// response=element;
+// });
+// }else{
+// console.log(error);
+// }
+console.log(data);
+return data;
+}
 
 
 

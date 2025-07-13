@@ -6,6 +6,11 @@
 Set Diagnosis
 </ion-label>
 </ion-item>
+<ion-item button lines="full" @click="router.push('/diagnosis')">
+<ion-label>
+View Diagnosis
+</ion-label>
+</ion-item>
 </ion-list>
 </app-layout>
 </template>
