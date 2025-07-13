@@ -32,6 +32,10 @@
 </ion-label>
 </ion-item>
 
+<ion-item button @click="router.push('/settings')">
+<ion-label>Settings</ion-label>
+</ion-item>
+
 <ion-item button @click="logout">
 <ion-label>Logout</ion-label>
 </ion-item>

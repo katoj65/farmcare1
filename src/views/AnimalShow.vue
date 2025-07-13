@@ -366,11 +366,20 @@ response.push({action:'Environment temperature is normal.'});
 response.push({action:'Provide shade, clean water.'});
 response.push({action:'Adjust dietary needs.'});
 }
-
 }
-
 return response;
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

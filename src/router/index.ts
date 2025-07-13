@@ -159,8 +159,22 @@ name:'disease show'
 path:'/login',
 component:()=>import('@/views/Login.vue'),
 name:'login'
+},
+{
+path:'/settings',
+component:()=>import('@/views/Settings.vue'),
+name:'settings'
+},
+{
+path:'/add/diagnosis',
+component:()=>import('@/views/AddDiagonisis.vue'),
+name:'add diagnosis'
+},
+{
+path:'/diagnosis',
+component:()=>import('@/views/Diagnosis.vue'),
+name:'diagnosis'
 }
-
 
 
 
