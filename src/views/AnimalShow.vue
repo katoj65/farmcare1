@@ -92,17 +92,14 @@ Animal Health Report
 </ion-note>
 </div>
 </ion-item>
-</ion-list>
 
 
-<ion-list v-if="row.diagnosis.length>0">
-<ion-list-header color="light" style="margin-top:5px;">
+
+<ion-list-header color="light" style="margin-top:5px;" v-if="row.diagnosis.length>0">
 <ion-label style="font-weight:bold;">
 Diagnosis
 </ion-label>
 </ion-list-header>
-
-
 <ion-item v-for="(d,key) in row.diagnosis" :key="key" lines="full">
 <ion-label>
 <h4>
@@ -126,7 +123,16 @@ Treatment
 </div>
 </ion-label>
 </ion-item>
+
+
+
+
+
+
 </ion-list>
+
+
+
 
 </div>
 
