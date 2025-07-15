@@ -520,9 +520,7 @@ Treatment
 
 
 
-<div>
-<h6>Reffer to the farm veterinary doctor for treatment</h6>
-</div>
+
 
 </ion-note>
 
@@ -541,7 +539,9 @@ Treatment
 
 
 
-
+<div>
+<h6 style="font-weight:bold;">Reffer to the farm veterinary doctor for treatment</h6>
+</div>
 
 </div>
 
