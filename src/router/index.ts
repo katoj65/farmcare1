@@ -75,11 +75,15 @@ path:'/animal/add/:id',
 component:()=>import('@/views/FarmAnimalCreate.vue'),
 name:'add farm animal'
 },
+
 {
 path:'/animal/:id',
 component:()=>import('@/views/AnimalShow.vue'),
 name:'animal details'
 },
+
+
+
 {
 path:'/worker/add/:id',
 component:()=>import('@/views/FarmAddWorker.vue'),
@@ -174,7 +178,13 @@ name:'add diagnosis'
 path:'/diagnosis',
 component:()=>import('@/views/Diagnosis.vue'),
 name:'diagnosis'
-}
+},
+{
+path:'/animal/:id/sickness',
+component:()=>import('@/views/AnimalShow.vue'),
+name:'animal details1'
+},
+
 
 
 

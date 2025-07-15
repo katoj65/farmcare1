@@ -61,7 +61,6 @@
 
 <ion-list-header color="light">
 <ion-label style="font-weight:bold;">
-
 Animal Health Report
 </ion-label>
 
@@ -126,25 +125,34 @@ Treatment
 Based on additional information provided
 </ion-label>
 </ion-list-header>
-<ion-item v-for="(a,key) in row.animalHealth" :key="key" lines="none">
-<ion-label :style="a.state=='sick' ? 'color:red;' : 'color:black;'">
+
+
+
+<div v-for="(a,key) in row.animalHealth" :key="key">
+<ion-item lines="none" :color="a.state=='sick' ? 'danger' : 'success'">
+<ion-label>
 {{ a.comment }}
 </ion-label>
 </ion-item>
+</div>
 
 
 
-
-<ion-item v-if="row.animalHealthState =='sick' && row.sickness.length==0" lines="none">
+<div v-if="row.animalHealthState =='sick' && row.sickness.length==0" >
+<ion-item lines="none">
 <ion-button expand="block" style="width:100%;margin-top:20px;" class="ion-button" size="default" type="submit" color="primary" @click="modal1(true)">
 Provide your observation
 </ion-button>
 </ion-item>
-<ion-item v-else-if="row.animalHealthState !='sick'" lines="none">
-<ion-label>
-The animal is generall healthy
+</div>
+<div v-else-if="row.animalHealthState !='sick'" lines="none" color="success">
+<ion-item >
+<ion-label style="font-size:20px;">
+The animal is generally healthy
 </ion-label>
 </ion-item>
+</div>
+
 
 
 
@@ -152,7 +160,7 @@ The animal is generall healthy
 <div v-for="(s,key) in row.sickness" :key="key">
 
 <ion-list-header color="light" style="margin-bottom:2px;">
-<ion-label>
+<ion-label style="font-weight:bold;">
 Signs observed
 </ion-label>
 </ion-list-header>
@@ -165,7 +173,7 @@ Signs observed
 Weight loss
 </ion-label>
 <ion-note slot="end">
-{{ s.weight_loss==true?'Yes':'No' }}
+{{ s.weight_loss=='true'?'Yes':'No' }}
 </ion-note>
 </ion-item>
 <ion-item lines="none" color="light" style="margin-bottom:2px;">
@@ -210,6 +218,18 @@ Feet infection
 </ion-item>
 
 
+<ion-item lines="none">
+<ion-button expand="block" style="width:100%;margin-top:20px;" class="ion-button" size="default" type="submit" color="light" @click="modal2(true)">Diagnosis</ion-button>
+</ion-item>
+
+
+
+
+
+</div>
+</div>
+
+
 
 
 
@@ -218,21 +238,6 @@ Feet infection
 
 
 </div>
-</div>
-
-
-
-
-
-
-
-
-
-</div>
-
-
-
-
 
 
 
@@ -251,7 +256,7 @@ Feet infection
 </ion-fab>
 
 
-<ion-modal :is-open="isOpen" v-if="route.name=='animal details'">
+<ion-modal :is-open="isOpen" v-if="route.name=='animal details'|| route.name=='animal details1'">
 <ion-header>
 <ion-toolbar>
 <ion-title>Add animal report</ion-title>
@@ -336,7 +341,7 @@ Feet infection
 
 
 <!--Additional Informational------->
-<ion-modal :is-open="isOpen1" v-if="route.name=='animal details' && row.animalHealthState=='sick'">
+<ion-modal :is-open="isOpen1" v-if="(route.name=='animal details' || route.name=='animal details1') && row.animalHealthState=='sick'">
 <ion-header>
 <ion-toolbar>
 <ion-title>Additional information</ion-title>
@@ -431,6 +436,144 @@ Please provide additional information about the animal health
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Diagnosis------->
+<ion-modal :is-open="isOpen2" v-if="(route.name=='animal details' || route.name=='animal details1') && row.animalHealthState=='sick'">
+    <ion-header>
+    <ion-toolbar>
+    <ion-title>Diagnosis</ion-title>
+    <ion-buttons slot="end">
+    <ion-button @click="modal2(false)">Close</ion-button>
+    </ion-buttons>
+    </ion-toolbar>
+    </ion-header>
+    <ion-content>
+
+
+    <ion-list>
+    <ion-item detail="false" color="light" lines="none">
+    <div class="unread-indicator-wrapper" slot="start"></div>
+    <ion-avatar slot="start">
+    <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+    </ion-avatar>
+    <ion-label>
+    <strong style="font-size:25px;text-transform:capitalize">{{ row.animal.name }}</strong>
+    </ion-label>
+    <div class="metadata-end-wrapper" slot="end">
+    <ion-icon color="medium" :icon="pricetagSharp"></ion-icon>
+    <ion-note color="medium">{{  row.animal.tag }}</ion-note>
+    </div>
+    </ion-item>
+    </ion-list>
+
+
+
+
+
+
+<div>
+<div v-if="row.disease.length>0">
+
+<div v-for="(r,key) in row.disease" :key="key">
+
+<ion-item :button="true" detail="false" v-for="(s,key) in r" :key="key" lines="full">
+<div class="unread-indicator-wrapper" slot="start">
+<div class="unread-indicator"></div>
+</div>
+<ion-label>
+<strong>{{ s.disease.name }}</strong>
+<ion-text></ion-text><br />
+<ion-note color="medium" class="ion-text-wrap">
+<div style="margin-top:10px;">
+<h6 style="font-weight:bold;">
+Symptoms
+</h6>
+
+<div v-for="(sy,key) in s.disease.symptom" :key="key">
+  {{ sy.name }}
+</div>
+</div>
+
+<div style="margin-top:10px;">
+<h6 style="font-weight:bold;">
+Treatment
+</h6>
+
+<div v-for="(t,key) in s.disease.treatment" :key="key">
+{{ t.name }}
+</div>
+</div>
+
+
+
+
+
+</ion-note>
+
+
+
+
+</ion-label>
+</ion-item>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </ion-content>
+    </ion-modal>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </app-layout>
 </template>
 <script setup>
@@ -439,7 +582,7 @@ import { useRoute,useRouter } from 'vue-router';
 import { reactive, onMounted, computed,ref } from 'vue';
 import {db} from '@/Database/database';
 import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle,IonItem, IonLabel, IonList, IonNote,IonListHeader, IonIcon, IonButton, IonFab, IonFabButton,
-IonButtons,IonModal, IonHeader, IonToolbar, IonContent, IonTitle,IonInput, IonSelect,IonSelectOption, IonBadge, IonAvatar,IonToggle  } from '@ionic/vue';
+IonButtons,IonModal, IonHeader, IonToolbar, IonContent, IonTitle,IonInput, IonSelect,IonSelectOption, IonBadge, IonAvatar,IonToggle, IonText  } from '@ionic/vue';
 import { ellipsisHorizontalCircleSharp, add, chevronForward,pricetagSharp } from 'ionicons/icons';
 
 
@@ -450,7 +593,8 @@ report:[],
 diagnosis:[],
 animalHealth:[],
 animalHealthState:'',
-sickness:[]
+sickness:[],
+disease:'',
 });
 
 
@@ -583,8 +727,6 @@ animalHealth.push({parameter:'heartbeat',comment:'The animal heartbeat is abnorm
 }
 });
 row.animalHealth=animalHealth;
-
-
 //create animal state
 row.animalHealth.forEach(element => {
 if(element.state=='sick'){
@@ -627,6 +769,14 @@ const isOpen1 = ref(false);
 const modal1=(state)=>{
 isOpen1.value=state;
 }
+
+
+
+const isOpen2 = ref(false);
+const modal2=(state)=>{
+isOpen2.value=state;
+}
+
 
 
 
@@ -788,6 +938,8 @@ weight_loss: sickness.weight,
 .select();
 if(error==null){
 modal1(false)
+router.push('/animal/'+id[2]+'/sickness');
+
 }else{
 console.log(error);
 }
@@ -809,6 +961,77 @@ console.log(error);
 }
 
 });
+
+
+
+//get parameters
+const parameters=async (item,amount)=>{
+const {data,error}=await db.from('parameters')
+.select('*,disease(*,symptom(*),treatment(*))')
+.eq('attribute',item)
+.gte('minimum',amount);
+return data;
+}
+
+
+
+
+
+//get potential disease
+onMounted(async ()=>{
+let id=route.path.split('/');
+const {data,error} = await db.from('animal_report')
+.select('type,description')
+.eq('animal_id',id[2]);
+
+
+const items=[];
+
+
+
+if(error==null){
+data.forEach(element => {
+if(element.type=='animal temperature'){
+
+db.from('parameters')
+.select('*,disease(*,symptom(*),treatment(*))')
+.eq('attribute','animal temperature')
+.gte('minimum',element.description)
+.then((res)=>{
+if(res.error==null){
+items.push(res.data);
+}
+})
+.catch((error)=>{console.log(error)});
+
+}else if(element.type=='heartbeat'){
+
+db.from('parameters')
+.select('*,disease(*,symptom(*),treatment(*))')
+.eq('attribute','heartbeat')
+.gte('minimum',element.description)
+.then((res)=>{
+if(res.error==null){
+items.push(res.data);
+}
+})
+.catch((error)=>{console.log(error)});
+
+}
+
+});
+row.disease=items;
+console.log(items);
+}else{
+console.log(error);
+}
+});
+
+
+
+
+
+
 
 
 
