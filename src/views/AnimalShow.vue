@@ -131,10 +131,12 @@ Based on your input
 
 
 
-<ion-item v-if="row.animalHealthState =='sick'" lines="none">
-<ion-button expand="block" style="width:100%;margin-top:20px;" class="ion-button" size="default" type="submit" color="primary" @click="modal1(true)">Provide additional information</ion-button>
+<ion-item v-if="row.animalHealthState =='sick' && row.sickness.length==0" lines="none">
+<ion-button expand="block" style="width:100%;margin-top:20px;" class="ion-button" size="default" type="submit" color="primary" @click="modal1(true)">
+Provide your observation
+</ion-button>
 </ion-item>
-<ion-item v-else>
+<ion-item v-else-if="row.animalHealthState !='sick'" lines="none">
 <ion-label>
 <h4>
 The animal is generall healthy
@@ -282,7 +284,8 @@ The animal is generall healthy
 
 
 
-<form  @submit.prevent="submit">
+<form  @submit.prevent="submitSckness">
+
 <ion-list>
 <ion-item lines="full">
 <ion-label>
@@ -290,25 +293,28 @@ Please provide additional information about the animal health
 </ion-label>
 </ion-item>
 
-
 <ion-item lines="full">
-<ion-toggle>Defficult feeding</ion-toggle>
+<ion-toggle v-model="sickness.weakness">General weakness</ion-toggle>
 </ion-item>
 
 <ion-item lines="full">
-<ion-toggle>General weakness</ion-toggle>
+<ion-toggle v-model="sickness.feeding">Defficult feeding</ion-toggle>
 </ion-item>
 
 <ion-item lines="full">
-<ion-toggle>Mouth infection</ion-toggle>
+<ion-toggle v-model="sickness.mouth">Mouth discharge</ion-toggle>
 </ion-item>
 
 <ion-item lines="full">
-<ion-toggle>Nose infection</ion-toggle>
+<ion-toggle v-model="sickness.nose">Nose discharge</ion-toggle>
 </ion-item>
 
 <ion-item lines="full">
-<ion-toggle>Feet infection</ion-toggle>
+<ion-toggle v-model="sickness.feet">Feet infection</ion-toggle>
+</ion-item>
+
+<ion-item lines="full">
+<ion-toggle v-model="sickness.weight">Weight loss</ion-toggle>
 </ion-item>
 
 
@@ -358,7 +364,8 @@ back:'',
 report:[],
 diagnosis:[],
 animalHealth:[],
-animalHealthState:''
+animalHealthState:'',
+sickness:[]
 });
 
 
@@ -669,9 +676,54 @@ return response;
 
 
 
+// Additonal information
+const sickness=reactive({
+weakness:false,
+mouth:false,
+nose:false,
+feet:false,
+feeding:false,
+weight:false
+});
+
+const submitSckness=async ()=>{
+let id=route.path.split('/');
+const {data,error}=await db.from('animal_health_information')
+.insert([
+{
+animal_id:id[2],
+general_weakness: sickness.weakness,
+mouth_infection: sickness.mouth,
+nose_infection: sickness.nose,
+feet_infection: sickness.feet,
+difficult_feeding: sickness.feeding,
+weight_loss: sickness.weight,
+},
+])
+.select();
+if(error==null){
+modal1(false)
+}else{
+console.log(error);
+}
+
+}
 
 
 
+//get additional informational
+onMounted(async()=>{
+let id=route.path.split('/');
+const {data,error}=await db.from('animal_health_information')
+.select('*')
+.eq('animal_id',id[2]);
+if(error==null){
+row.sickness=data;
+}else{
+console.log(error);
+}
+
+});
 
 
 
