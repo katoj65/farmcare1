@@ -2,6 +2,10 @@
 <app-layout title="Animal details" :back="row.back">
 <div v-if="row.animal!=''" style="padding-bottom:100px;">
 
+
+
+
+
 <ion-item lines="none" color="light">
 <ion-avatar>
 <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
@@ -144,8 +148,83 @@ The animal is generall healthy
 </ion-label>
 </ion-item>
 
+<div v-if="row.sickness.length>0" style="padding:10px;">
+<div v-for="(s,key) in row.sickness" :key="key">
+<h5>Observations</h5>
+
+
+
+<ion-item lines="none" color="light" style="margin-bottom:2px;">
+<ion-label>
+Weight loss
+</ion-label>
+<ion-note slot="end">
+{{ s.weight_loss==true?'Yes':'No' }}
+</ion-note>
+</ion-item>
+<ion-item lines="none" color="light" style="margin-bottom:2px;">
+<ion-label>
+General weakness
+</ion-label>
+<ion-note slot="end">
+{{ s.general_weakness=='true'?'Yes':'No' }}
+</ion-note>
+</ion-item>
+<ion-item lines="none" color="light" style="margin-bottom:2px;">
+<ion-label>
+Difficult feeding
+</ion-label>
+<ion-note slot="end">
+{{ s.difficult_feeding=='true'?'Yes':'No' }}
+</ion-note>
+</ion-item>
+<ion-item lines="none" color="light" style="margin-bottom:2px;">
+<ion-label>
+Mouth discharge
+</ion-label>
+<ion-note slot="end">
+{{ s.mouth_infection=='true'?'Yes':'No' }}
+</ion-note>
+</ion-item>
+<ion-item lines="none" color="light" style="margin-bottom:2px;">
+<ion-label>
+Nose discharge
+</ion-label>
+<ion-note slot="end">
+{{ s.nose_infection=='true'?'Yes':'No' }}
+</ion-note>
+</ion-item>
+<ion-item lines="none" color="light" style="margin-bottom:2px;">
+<ion-label>
+Feet infection
+</ion-label>
+<ion-note slot="end">
+{{ s.feet_infection=='true'?'Yes':'No' }}
+</ion-note>
+</ion-item>
+
+
+
+
+
+
+
+
 
 </div>
+</div>
+
+
+
+
+
+
+
+
+
+</div>
+
+
 
 
 
