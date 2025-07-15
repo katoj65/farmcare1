@@ -1,1 +1,0 @@
-import{y as a,c as e,w as s,u as o,A as r,C as t,o as c,a as u,am as n,U as _}from"./index-D3KXEEJA.js";const f={__name:"Login",setup(m){return r(),a({email:"katoj65@gmail.com",password:"09/u/2252"}),a({error:"",success:""}),t(),(i,l)=>(c(),e(o(_),null,{default:s(()=>[u(n)]),_:1}))}};export{f as default};
