@@ -521,7 +521,7 @@ Treatment
 
 
 <div>
-<h6>Reffer to your veterinary doctor for treatment</h6>
+<h6>Reffer to the farm veterinary doctor for treatment</h6>
 </div>
 
 </ion-note>
