@@ -1,12 +1,6 @@
 <template>
 <app-layout title="Animal details" :back="row.back">
 <div v-if="row.animal!=''" style="padding-bottom:100px;">
-<ion-list>
-
-
-
-
-
 
 <ion-item lines="none" color="light">
 <ion-avatar>
@@ -122,11 +116,35 @@ Treatment
 </ion-item> -->
 
 
+<div  v-if="row.animalHealth.length>0">
+<ion-list-header color="light" style="margin-top:5px;">
+<ion-label style="font-weight:bold;">
+Based on your input
+</ion-label>
+</ion-list-header>
+<ion-item v-for="(a,key) in row.animalHealth" :key="key" lines="full">
+<ion-label :style="a.state=='sick' ? 'color:red;' : 'color:black;'">
+{{ a.comment }}
+</ion-label>
+</ion-item>
 
 
 
 
-</ion-list>
+<ion-item v-if="row.animalHealthState =='sick'" lines="none">
+<ion-button expand="block" style="width:100%;margin-top:20px;" class="ion-button" size="default" type="submit" color="primary" @click="modal1(true)">Provide additional information</ion-button>
+</ion-item>
+<ion-item v-else>
+<ion-label>
+<h4>
+The animal is generall healthy
+</h4>
+</ion-label>
+</ion-item>
+
+
+</div>
+
 
 
 
@@ -213,6 +231,115 @@ Treatment
 
 </ion-content>
 </ion-modal>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--Additional Informational------->
+<ion-modal :is-open="isOpen1" v-if="route.name=='animal details' && row.animalHealthState=='sick'">
+<ion-header>
+<ion-toolbar>
+<ion-title>Additional information</ion-title>
+<ion-buttons slot="end">
+<ion-button @click="modal1(false)">Close</ion-button>
+</ion-buttons>
+</ion-toolbar>
+</ion-header>
+<ion-content>
+
+
+<ion-list>
+<ion-item detail="false" color="light" lines="none">
+<div class="unread-indicator-wrapper" slot="start"></div>
+<ion-avatar slot="start">
+<img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+</ion-avatar>
+<ion-label>
+<strong style="font-size:25px;text-transform:capitalize">{{ row.animal.name }}</strong>
+</ion-label>
+<div class="metadata-end-wrapper" slot="end">
+<ion-icon color="medium" :icon="pricetagSharp"></ion-icon>
+<ion-note color="medium">{{  row.animal.tag }}</ion-note>
+</div>
+</ion-item>
+</ion-list>
+
+
+
+
+
+
+<form  @submit.prevent="submit">
+<ion-list>
+<ion-item lines="full">
+<ion-label>
+Please provide additional information about the animal health
+</ion-label>
+</ion-item>
+
+
+<ion-item lines="full">
+<ion-toggle>Defficult feeding</ion-toggle>
+</ion-item>
+
+<ion-item lines="full">
+<ion-toggle>General weakness</ion-toggle>
+</ion-item>
+
+<ion-item lines="full">
+<ion-toggle>Mouth infection</ion-toggle>
+</ion-item>
+
+<ion-item lines="full">
+<ion-toggle>Nose infection</ion-toggle>
+</ion-item>
+
+<ion-item lines="full">
+<ion-toggle>Feet infection</ion-toggle>
+</ion-item>
+
+
+<ion-item lines="none">
+<ion-button expand="block" style="width:100%;margin-top:20px;" class="ion-button" size="default" type="submit" color="primary" >Save</ion-button>
+</ion-item>
+
+</ion-list>
+</form>
+
+
+
+
+
+
+
+</ion-content>
+</ion-modal>
+
+
+
+
+
+
+
+
+
+
+
+
+
 </app-layout>
 </template>
 <script setup>
@@ -221,7 +348,7 @@ import { useRoute,useRouter } from 'vue-router';
 import { reactive, onMounted, computed,ref } from 'vue';
 import {db} from '@/Database/database';
 import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle,IonItem, IonLabel, IonList, IonNote,IonListHeader, IonIcon, IonButton, IonFab, IonFabButton,
-IonButtons,IonModal, IonHeader, IonToolbar, IonContent, IonTitle,IonInput, IonSelect,IonSelectOption, IonBadge, IonAvatar  } from '@ionic/vue';
+IonButtons,IonModal, IonHeader, IonToolbar, IonContent, IonTitle,IonInput, IonSelect,IonSelectOption, IonBadge, IonAvatar,IonToggle  } from '@ionic/vue';
 import { ellipsisHorizontalCircleSharp, add, chevronForward,pricetagSharp } from 'ionicons/icons';
 
 
@@ -230,7 +357,8 @@ animal:'',
 back:'',
 report:[],
 diagnosis:[],
-animalHealth:[]
+animalHealth:[],
+animalHealthState:''
 });
 
 
@@ -304,6 +432,12 @@ const route=useRoute();
 // });
 
 
+
+
+
+
+
+
 //get animal details
 onMounted(async ()=>{
 let id=route.path.split('/');
@@ -329,6 +463,45 @@ const {data,error}=await db.from('animal_report')
 .eq('animal_id',id[2]);
 if(error==null){
 row.report=data;
+if(data.length>0){
+let animalHealth=[];
+data.forEach(element => {
+//animal temperature
+if(element.type=='animal temperature'){
+// console.log(element);
+if(element.description>35 && element.description<40){
+animalHealth.push({parameter:'temperature',comment:'The animal temperature is normal.',state:'healthy'});
+}else if(element.description>40){
+animalHealth.push({parameter:'temperature',comment:'The animal temperature is high.',state:'sick'});
+}
+else{
+animalHealth.push({parameter:'temperature',comment:'The animal temperature is high.',state:'sick'});
+}
+
+}
+//heartbeat
+else if(element.type=='heartbeat'){
+if(element.description>=48 && element.description<=84){
+animalHealth.push({parameter:'heartbeat',comment:'The animal heartbeat is normal.',state:'healthy'});
+}else if(element.description>84){
+animalHealth.push({parameter:'heartbeat',comment:'The animal heartbeat is abnormal.',state:'sick'});
+}else{
+animalHealth.push({parameter:'heartbeat',comment:'The animal heartbeat is abnormal.',state:'sick'});
+}
+}
+});
+row.animalHealth=animalHealth;
+
+
+//create animal state
+row.animalHealth.forEach(element => {
+if(element.state=='sick'){
+row.animalHealthState='sick';
+}
+});
+
+}
+
 }else{
 console.log(error);
 }
@@ -357,6 +530,12 @@ const isOpen = ref(false);
 const modal=(state)=>{
 isOpen.value=state;
 }
+
+const isOpen1 = ref(false);
+const modal1=(state)=>{
+isOpen1.value=state;
+}
+
 
 
 
@@ -432,25 +611,45 @@ const doctor=(option,count)=>{
 //heartbeat.
 //environmental temperature.
 let response=[];
+let animalHealth=[];
 if(option=='animal temperature'){
 
 if(count>35 && count<40){
 response.push({action:'Animal temperature normal.'});
+
+animalHealth.push({parameter:'temperature',comment:'The animal temperature is normal.',state:'healthy'});
+
 }else if(count>40){
+
 response.push({action:'Antibiotics.'});
 response.push({action:'Isolate the animal.'});
+
+animalHealth.push({parameter:'temperature',comment:'The animal temperature is high.',state:'sick'});
+
 }else{
 response.push({action:'Move to animal to shade.'});
+
+animalHealth.push({parameter:'temperature',comment:'The animal temperature is high.',state:'sick'});
+
 }
 
 }else if(option=='heartbeat'){
 
 if(count>=48 && count<=84){
 response.push({action:'Heartbeat is normal.'});
+
+animalHealth.push({parameter:'heartbeat',comment:'The animal heartbeat is normal.',state:'healthy'});
+
 }else if(count>84){
 response.push({action:'Refer to the veterinary doctor for heartbeat.'});
+
+animalHealth.push({parameter:'heartbeat',comment:'The animal heartbeat is abnormal.',state:'sick'});
+
 }else{
 response.push({action:'Refer to the veterinary doctor.'});
+
+animalHealth.push({parameter:'heartbeat',comment:'The animal heartbeat is abnormal.',state:'sick'});
+
 }
 
 
@@ -463,8 +662,15 @@ response.push({action:'Provide shade, clean water.'});
 response.push({action:'Adjust dietary needs.'});
 }
 }
+
+// console.log(animalHealth);
 return response;
 }
+
+
+
+
+
 
 
 
