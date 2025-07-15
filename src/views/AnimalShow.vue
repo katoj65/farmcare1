@@ -219,7 +219,7 @@ Feet infection
 
 
 <ion-item lines="none">
-<ion-button expand="block" style="width:100%;margin-top:20px;" class="ion-button" size="default" type="submit" color="light" @click="modal2(true)">Diagnosis</ion-button>
+<ion-button expand="block" style="width:100%;margin-top:20px;" class="ion-button" size="default" type="submit" color="light" @click="modal2(true)">Diagnose</ion-button>
 </ion-item>
 
 
@@ -520,7 +520,9 @@ Treatment
 
 
 
-
+<div>
+<h6>Reffer to your veterinary doctor for treatment</h6>
+</div>
 
 </ion-note>
 
