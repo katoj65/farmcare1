@@ -59,21 +59,18 @@
 </ion-note>
 </ion-item>
 
-<ion-item lines="none">
-<ion-label>Date added</ion-label>
-<ion-note color="medium" style="text-transform:capitalize;font-size:10px;">
-{{ row.animal.created_at }}
-</ion-note>
-</ion-item>
+
 
 <ion-list-header color="light">
 <ion-label style="font-weight:bold;">
 
 Animal Health Report
 </ion-label>
+
 <ion-button v-if="row.report.length>0" color="dark" @click="router.push('/share/'+row.animal.id)">
 <span class="material-icons" >share</span>
 </ion-button>
+
 </ion-list-header>
 
 
@@ -94,7 +91,7 @@ Animal Health Report
 </ion-item>
 
 
-
+<!--
 <ion-list-header color="light" style="margin-top:5px;" v-if="row.diagnosis.length>0">
 <ion-label style="font-weight:bold;">
 Diagnosis
@@ -122,7 +119,7 @@ Treatment
 </p>
 </div>
 </ion-label>
-</ion-item>
+</ion-item> -->
 
 
 
@@ -232,70 +229,119 @@ const row=reactive({
 animal:'',
 back:'',
 report:[],
-diagnosis:[]
+diagnosis:[],
+animalHealth:[]
 });
 
 
 const router=useRouter();
 const route=useRoute();
-onMounted(()=>{
-let id=route.path.split('/');
-db.from('animal')
-.select('*,farm (name, location,tel,type,size,id)')
-.eq('id',id[2])
-.then((response)=>{
-if(response.error==null){
-// row.animal=response.data;
+// onMounted(()=>{
+// let id=route.path.split('/');
 
-response.data.forEach(element => {
+
+
+// db.from('animal')
+// .select('*,farm (name, location,tel,type,size,id)')
+// .eq('id',id[2])
+// .then((response)=>{
+// if(response.error==null){
+// // row.animal=response.data;
+// response.data.forEach(element => {
+// row.animal=element
+// row.back='/farm/show/'+element.farm.id;
+// });
+
+
+
+
+
+
+
+// //get animal reports
+// db.from('animal_report')
+// .select("type,description")
+// .eq('animal_id',row.animal.id)
+// .limit(3)
+// .then((response)=>{
+// if(response.error==null){
+// row.report=response.data;
+// // get potential disease
+
+// response.data.forEach(element => {
+// // console.log(element);
+// db.from('parameters')
+// .select('*,disease(*,symptom(*),treatment(*))')
+// .eq('attribute',element.type)
+// .gte('minimum',element.description)
+// .then((res)=>{
+// if(res.error==null){
+// res.data.forEach(element => {
+// row.diagnosis.push(element);
+// });
+
+// console.log(row.diagnosis);
+
+
+// }else{
+// console.log(res.error);
+// }
+// }).catch((err)=>console.log(err));
+// });
+
+
+// }else{
+// console.log(response.error);
+// }
+// })
+// .catch((error)=>{console.log(error)});
+// }else{
+// console.log(response.error);
+// }
+// })
+// .catch((error)=>{console.log(error)});
+
+// });
+
+
+//get animal details
+onMounted(async ()=>{
+let id=route.path.split('/');
+const {data,error}=await db.from('animal')
+.select('*,farm (name, location,tel,type,size,id)')
+.eq('id',id[2]);
+if(error==null){
+data.forEach(element => {
 row.animal=element
 row.back='/farm/show/'+element.farm.id;
 });
+}else{
+console.log(error);
+}
+});
 
-//get animal reports
-db.from('animal_report')
+
+//get animal report
+onMounted(async()=>{
+let id=route.path.split('/');
+const {data,error}=await db.from('animal_report')
 .select("type,description")
-.eq('animal_id',row.animal.id)
-.limit(3)
-.then((response)=>{
-if(response.error==null){
-row.report=response.data;
-// get potential disease
-
-response.data.forEach(element => {
-// console.log(element);
-db.from('parameters')
-.select('*,disease(*,symptom(*),treatment(*))')
-.eq('attribute',element.type)
-.gte('minimum',element.description)
-.then((res)=>{
-if(res.error==null){
-res.data.forEach(element => {
-row.diagnosis.push(element);
-});
-
-console.log(row.diagnosis);
-
-
+.eq('animal_id',id[2]);
+if(error==null){
+row.report=data;
 }else{
-console.log(res.error);
+console.log(error);
 }
-}).catch((err)=>console.log(err));
 });
 
 
-}else{
-console.log(response.error);
-}
-})
-.catch((error)=>{console.log(error)});
-}else{
-console.log(response.error);
-}
-})
-.catch((error)=>{console.log(error)});
 
-});
+
+
+
+
+
+
 
 
 
@@ -318,11 +364,9 @@ const form=reactive({
 report:'',
 description:''
 });
-
 const message=reactive({
 error:null,
 });
-
 
 const measurements=(item)=>{
 let measure='';
@@ -421,30 +465,6 @@ response.push({action:'Adjust dietary needs.'});
 }
 return response;
 }
-
-
-
-
-
-
-//diagnosis
-const diagnosis=(param)=>{
-const {data,error}=db.from('parameters')
-.select('*,disease(*,symptom(*),treatment(*))')
-.eq('attribute',param.type)
-.gte('minimum',param.description);
-// let  response='';
-// if(error==null){
-// data.forEach(element => {
-// response=element;
-// });
-// }else{
-// console.log(error);
-// }
-console.log(data);
-return data;
-}
-
 
 
 
