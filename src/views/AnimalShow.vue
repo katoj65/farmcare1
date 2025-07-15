@@ -123,10 +123,10 @@ Treatment
 <div  v-if="row.animalHealth.length>0">
 <ion-list-header color="light" style="margin-top:5px;">
 <ion-label style="font-weight:bold;">
-Based on your input
+Based on additional information provided
 </ion-label>
 </ion-list-header>
-<ion-item v-for="(a,key) in row.animalHealth" :key="key" lines="full">
+<ion-item v-for="(a,key) in row.animalHealth" :key="key" lines="none">
 <ion-label :style="a.state=='sick' ? 'color:red;' : 'color:black;'">
 {{ a.comment }}
 </ion-label>
@@ -142,15 +142,21 @@ Provide your observation
 </ion-item>
 <ion-item v-else-if="row.animalHealthState !='sick'" lines="none">
 <ion-label>
-<h4>
 The animal is generall healthy
-</h4>
 </ion-label>
 </ion-item>
 
+
+
 <div v-if="row.sickness.length>0" style="padding:10px;">
 <div v-for="(s,key) in row.sickness" :key="key">
-<h5>Observations</h5>
+
+<ion-list-header color="light" style="margin-bottom:2px;">
+<ion-label>
+Signs observed
+</ion-label>
+</ion-list-header>
+
 
 
 
