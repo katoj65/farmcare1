@@ -138,7 +138,7 @@ Based on additional information provided
 
 
 
-<div v-if="row.animalHealthState =='sick' && row.sickness.length==0" >
+<div v-if="row.animalHealthState =='sick' && row.observation.length==0" >
 <ion-item lines="none">
 <ion-button expand="block" style="width:100%;margin-top:20px;" class="ion-button" size="default" type="submit" color="primary" @click="modal1(true)">
 Provide your observation
@@ -154,80 +154,51 @@ The animal is generally healthy
 </div>
 
 
-
-
-<div v-if="row.sickness.length>0" style="padding:10px;">
-<div v-for="(s,key) in row.sickness" :key="key">
-
+<div v-if="row.observation.length>0">
 <ion-list-header color="light" style="margin-bottom:2px;">
 <ion-label style="font-weight:bold;">
 Signs observed
 </ion-label>
 </ion-list-header>
-
-
-
-
-<ion-item lines="none" color="light" style="margin-bottom:2px;">
-<ion-label>
-Weight loss
+<ion-item lines="none" color="light" style="margin-bottom:2px;" v-for="(o,key) in row.observation" :key="key">
+<ion-label style="text-transform:capitalize;">
+{{ o.sign }}
 </ion-label>
 <ion-note slot="end">
-{{ s.weight_loss=='true'?'Yes':'No' }}
-</ion-note>
-</ion-item>
-<ion-item lines="none" color="light" style="margin-bottom:2px;">
-<ion-label>
-General weakness
-</ion-label>
-<ion-note slot="end">
-{{ s.general_weakness=='true'?'Yes':'No' }}
-</ion-note>
-</ion-item>
-<ion-item lines="none" color="light" style="margin-bottom:2px;">
-<ion-label>
-Difficult feeding
-</ion-label>
-<ion-note slot="end">
-{{ s.difficult_feeding=='true'?'Yes':'No' }}
-</ion-note>
-</ion-item>
-<ion-item lines="none" color="light" style="margin-bottom:2px;">
-<ion-label>
-Mouth discharge
-</ion-label>
-<ion-note slot="end">
-{{ s.mouth_infection=='true'?'Yes':'No' }}
-</ion-note>
-</ion-item>
-<ion-item lines="none" color="light" style="margin-bottom:2px;">
-<ion-label>
-Nose discharge
-</ion-label>
-<ion-note slot="end">
-{{ s.nose_infection=='true'?'Yes':'No' }}
-</ion-note>
-</ion-item>
-<ion-item lines="none" color="light" style="margin-bottom:2px;">
-<ion-label>
-Feet infection
-</ion-label>
-<ion-note slot="end">
-{{ s.feet_infection=='true'?'Yes':'No' }}
+  <ion-icon :icon="checkmarkCircle" ></ion-icon>
 </ion-note>
 </ion-item>
 
-
-<ion-item lines="none">
+<!-- <ion-item lines="none">
 <ion-button expand="block" style="width:100%;margin-top:20px;" class="ion-button" size="default" type="submit" color="light" @click="modal2(true)">Diagnose</ion-button>
-</ion-item>
+</ion-item> -->
 
+<div v-if="potentalDisease.length>0">
+
+<ion-list-header color="light" style="margin-bottom:2px;">
+<ion-label style="font-weight:bold;">
+Potential diseases
+</ion-label>
+</ion-list-header>
+
+
+<ion-item lines="none" color="light" style="margin-bottom:2px;" v-for="(m,key) in potentalDisease" :key="key">
+  <ion-label style="text-transform:capitalize;">
+  {{ m }}
+  </ion-label>
+  <ion-note slot="end">
+   Diagnise
+  </ion-note>
+  </ion-item>
 
 
 
 
 </div>
 </div>
+
+
+
 
 
 
@@ -383,11 +354,13 @@ Please provide additional information about the animal health
 </ion-label>
 </ion-item>
 
-<ion-item lines="full">
-<ion-toggle v-model="sickness.weakness">General weakness</ion-toggle>
+<ion-item lines="full" v-for="(sign,key) in row.listSigns" :key="key">
+<ion-toggle :v-model="key" style="text-transform:capitalize;" :checked="false" @click="setValue(sign.name)" v-model="sickness[sign.name]">
+{{ sign.name }}
+</ion-toggle>
 </ion-item>
 
-<ion-item lines="full">
+<!-- <ion-item lines="full">
 <ion-toggle v-model="sickness.feeding">Defficult feeding</ion-toggle>
 </ion-item>
 
@@ -405,7 +378,7 @@ Please provide additional information about the animal health
 
 <ion-item lines="full">
 <ion-toggle v-model="sickness.weight">Weight loss</ion-toggle>
-</ion-item>
+</ion-item> -->
 
 
 <ion-item lines="none">
@@ -547,21 +520,8 @@ Treatment
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </ion-content>
-    </ion-modal>
+</ion-content>
+</ion-modal>
 
 
 
@@ -585,7 +545,7 @@ import { reactive, onMounted, computed,ref } from 'vue';
 import {db} from '@/Database/database';
 import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle,IonItem, IonLabel, IonList, IonNote,IonListHeader, IonIcon, IonButton, IonFab, IonFabButton,
 IonButtons,IonModal, IonHeader, IonToolbar, IonContent, IonTitle,IonInput, IonSelect,IonSelectOption, IonBadge, IonAvatar,IonToggle, IonText  } from '@ionic/vue';
-import { ellipsisHorizontalCircleSharp, add, chevronForward,pricetagSharp } from 'ionicons/icons';
+import { ellipsisHorizontalCircleSharp, add, chevronForward,pricetagSharp,checkmarkCircle } from 'ionicons/icons';
 
 
 const row=reactive({
@@ -597,6 +557,8 @@ animalHealth:[],
 animalHealthState:'',
 sickness:[],
 disease:'',
+listSigns:[],
+observation:[]
 });
 
 
@@ -985,12 +947,7 @@ let id=route.path.split('/');
 const {data,error} = await db.from('animal_report')
 .select('type,description')
 .eq('animal_id',id[2]);
-
-
 const items=[];
-
-
-
 if(error==null){
 data.forEach(element => {
 if(element.type=='animal temperature'){
@@ -1031,7 +988,87 @@ console.log(error);
 
 
 
+onMounted(async ()=>{
+const {data,error} = await
+db.from('observable_signs')
+.select('name');
+if(error==null){
+row.listSigns=data;
+}else{
+console.log(error);
+}
+});
 
+const setValue = async (item)=>{
+let id=route.path.split('/');
+const {data, error}=await db.from('animal_observation')
+.select('*')
+.eq('animal_id',id[2])
+.eq('sign',item);
+if(error==null){
+if(data.length==0){
+const insert=await db.from('animal_observation')
+.insert([{ animal_id:id[2],sign:item}])
+.select();
+}else{
+const remove=await db.from('animal_observation')
+.delete()
+.eq('animal_id',id[2])
+.eq('sign',item);
+}
+}else{
+console.log(error);
+}
+
+
+
+
+
+}
+
+
+
+
+
+const potentalDisease=ref([]);
+onMounted(async()=>{
+let id=route.path.split('/');
+const {data,error}=await db.from('animal_observation')
+.select('sign')
+.eq('animal_id',id[2]);
+if(error==null){
+row.observation=data;
+
+
+//create array
+const items=[];
+data.forEach(element => {
+items.push(element.sign);
+});
+
+//query
+var disease=[];
+const sign=  await db.from('disease_signs')
+.select("*,disease(name,id)")
+.in('name',items);
+if(sign.error==null){
+sign.data.forEach(element => {
+disease.push(element.disease.name);
+});
+
+//remove duplicates
+disease = [...new Set(disease)];
+potentalDisease.value=disease;
+
+
+
+}else{
+console.log(sign.error);
+}
+}else{
+console.log(error);
+}
+});
 
 
 
