@@ -476,9 +476,14 @@ Treatment
 </ion-label>
 </ion-item>
 
-
 </div>
 
+
+<ion-list-header color="light" style="margin-bottom:2px;">
+  <ion-label style="font-weight:bold;">
+   Refer to the farm veterinary doctor for treatment
+  </ion-label>
+  </ion-list-header>
 
 </div>
 <div v-else>
@@ -493,9 +498,6 @@ Treatment
 
 
 
-<div>
-<h6 style="font-weight:bold;padding:10px;">Refer to the farm veterinary doctor for treatment</h6>
-</div>
 
 </div>
 
