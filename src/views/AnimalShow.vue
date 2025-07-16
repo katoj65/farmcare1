@@ -165,7 +165,7 @@ Signs observed
 {{ o.sign }}
 </ion-label>
 <ion-note slot="end">
-  <ion-icon :icon="checkmarkCircle" ></ion-icon>
+<ion-icon :icon="checkmarkCircle" ></ion-icon>
 </ion-note>
 </ion-item>
 
@@ -173,26 +173,23 @@ Signs observed
 <ion-button expand="block" style="width:100%;margin-top:20px;" class="ion-button" size="default" type="submit" color="light" @click="modal2(true)">Diagnose</ion-button>
 </ion-item> -->
 
-<div v-if="potentalDisease.length>0">
+<div v-if="array1!=''">
 
 <ion-list-header color="light" style="margin-bottom:2px;">
 <ion-label style="font-weight:bold;">
-Potential diseases
+Potential disease
 </ion-label>
 </ion-list-header>
 
 
-<ion-item lines="none" color="light" style="margin-bottom:2px;" v-for="(m,key) in potentalDisease" :key="key" button="true" @click="showDiagnosis(m)">
-  <ion-label style="text-transform:capitalize;">
-  {{ m }}
-  </ion-label>
-  <ion-note slot="end" style="font-size:17px;">
-   Diagnose
-  </ion-note>
-  </ion-item>
-
-
-
+<ion-item lines="none" color="dark" style="margin-bottom:2px;" button="true" @click="showDiagnosis(array1.name)">
+<ion-label style="text-transform:capitalize;">
+{{ array1.name }}
+</ion-label>
+<ion-note slot="end" style="font-size:17px;">
+Diagnose
+</ion-note>
+</ion-item>
 
 </div>
 </div>
@@ -225,6 +222,8 @@ Potential diseases
 <ion-icon :icon="add" ></ion-icon>
 </ion-fab-button>
 </ion-fab>
+
+
 
 
 <ion-modal :is-open="isOpen" v-if="route.name=='animal details'|| route.name=='animal details1'">
@@ -401,32 +400,32 @@ Please provide additional information about the animal health
 
 <!-- Diagnosis------->
 <ion-modal :is-open="isOpen2" v-if="(route.name=='animal details' || route.name=='animal details1') && row.animalHealthState=='sick'">
-    <ion-header>
-    <ion-toolbar>
-    <ion-title>Diagnosis</ion-title>
-    <ion-buttons slot="end">
-    <ion-button @click="modal2(false)">Close</ion-button>
-    </ion-buttons>
-    </ion-toolbar>
-    </ion-header>
-    <ion-content>
+<ion-header>
+<ion-toolbar>
+<ion-title>Diagnosis</ion-title>
+<ion-buttons slot="end">
+<ion-button @click="modal2(false)">Close</ion-button>
+</ion-buttons>
+</ion-toolbar>
+</ion-header>
+<ion-content>
 
 
-    <ion-list>
-    <ion-item detail="false" color="light" lines="none">
-    <div class="unread-indicator-wrapper" slot="start"></div>
-    <ion-avatar slot="start">
-    <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-    </ion-avatar>
-    <ion-label>
-    <strong style="font-size:25px;text-transform:capitalize">{{ row.animal.name }}</strong>
-    </ion-label>
-    <div class="metadata-end-wrapper" slot="end">
-    <ion-icon color="medium" :icon="pricetagSharp"></ion-icon>
-    <ion-note color="medium">{{  row.animal.tag }}</ion-note>
-    </div>
-    </ion-item>
-    </ion-list>
+<ion-list>
+<ion-item detail="false" color="light" lines="none">
+<div class="unread-indicator-wrapper" slot="start"></div>
+<ion-avatar slot="start">
+<img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+</ion-avatar>
+<ion-label>
+<strong style="font-size:25px;text-transform:capitalize">{{ row.animal.name }}</strong>
+</ion-label>
+<div class="metadata-end-wrapper" slot="end">
+<ion-icon color="medium" :icon="pricetagSharp"></ion-icon>
+<ion-note color="medium">{{  row.animal.tag }}</ion-note>
+</div>
+</ion-item>
+</ion-list>
 
 
 
@@ -460,7 +459,7 @@ Symptoms
 </ion-item>
 
 <ion-item lines="none" v-for="(s1,key) in i.symptom" :key="key">
-<ion-label style="text-transform:capitalize;">
+<ion-label>
 {{ s1.name }}
 </ion-label>
 </ion-item>
@@ -471,38 +470,21 @@ Treatment
 </ion-label>
 </ion-list-header>
 <ion-item lines="none" v-for="(t,key) in i.treatment" :key="key">
-<ion-label style="text-transform:capitalize;">
+<ion-label>
 {{ t.name }}
 </ion-label>
 </ion-item>
-
 </div>
-
-
 <ion-list-header color="light" style="margin-bottom:2px;">
-  <ion-label style="font-weight:bold;">
-   Refer to the farm veterinary doctor for treatment
-  </ion-label>
-  </ion-list-header>
-
+<ion-label style="font-weight:bold;">
+Refer to the farm veterinary doctor for treatment
+</ion-label>
+</ion-list-header>
 </div>
 <div v-else>
-
 </div>
-
 </div>
-
-
-
-
-
-
-
-
 </div>
-
-
-
 </ion-content>
 </ion-modal>
 
@@ -543,7 +525,8 @@ disease:'',
 listSigns:[],
 observation:[],
 // nmdjndjnd
-loadContent:[]
+loadContent:[],
+diseaseSign:[]
 });
 
 
@@ -1016,6 +999,7 @@ console.log(error);
 
 
 const potentalDisease=ref([]);
+const array1=ref([]);
 onMounted(async()=>{
 let id=route.path.split('/');
 const {data,error}=await db.from('animal_observation')
@@ -1023,8 +1007,6 @@ const {data,error}=await db.from('animal_observation')
 .eq('animal_id',id[2]);
 if(error==null){
 row.observation=data;
-
-
 //create array
 const items=[];
 data.forEach(element => {
@@ -1033,10 +1015,12 @@ items.push(element.sign);
 
 //query
 var disease=[];
+const newData=[];
 const sign=  await db.from('disease_signs')
-.select("*,disease(name,id)")
+.select("id,disease(name,id)")
 .in('name',items);
 if(sign.error==null){
+//rating
 sign.data.forEach(element => {
 disease.push(element.disease.name);
 });
@@ -1044,6 +1028,28 @@ disease.push(element.disease.name);
 //remove duplicates
 disease = [...new Set(disease)];
 potentalDisease.value=disease;
+console.log(newData);
+const stage1=[];
+for(let x=0; x<disease.length;x++){
+const {data,error}=await db.from('disease_signs')
+.select('id,disease(id)')
+.eq('disease.name',disease[x])
+.in('name',items);
+if(error==null){
+let content=data.map(s=>disease!=null?s.disease:null);
+console.log(content);
+stage1.push({
+name:disease[x],
+signs:format1(content).length
+})
+}
+
+}
+
+console.log(stage1);
+array1.value=format3(stage1);
+
+
 
 
 
@@ -1056,7 +1062,14 @@ console.log(error);
 });
 
 
-const diagnosisContent=[];
+
+
+
+
+
+
+
+
 const showDiagnosis = async (name)=>{
 modal2(true);
 const {data,error}=await db.from('disease')
@@ -1067,15 +1080,49 @@ row.loadContent=data;
 }else{
 console.log(error)
 }
-
-
 }
 
 
+// //get signs by disease
+// const getSignsByDisease = async (x,in)=>{
+// const {data,error}=await db.from('disease_signs')
+// .select('*,disease(name,id)')
+// .eq('disease.name',x)
+// .in('name',in);
 
+// console.log(data);
+//data.map(s>s.disease!=null?s.disease.name:'');
 
+// }
 
+const getSigns=(name,items)=>{
+return db.
+from('disease_signs')
+.select('*,disease(name,id)')
+.eq('disease.name',name)
+.in('name',items);
+}
 
+//stage 1
+const format1=(item)=>{
+let x=item.filter(s=>s!=null);
+return x;
+}
+
+//state2
+const format2=(item)=>{
+let x=item.sort((a,b)=>b.signs-a.signs);
+return x;
+}
+
+//state3
+const format3=(item)=>{
+let x=[];
+if(item.length>0){
+x= item.reduce((max,i)=>i.signs>max.signs?i:max);
+}
+return x;
+}
 
 
 
