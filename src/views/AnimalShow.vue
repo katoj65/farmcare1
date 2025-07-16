@@ -182,11 +182,11 @@ Potential diseases
 </ion-list-header>
 
 
-<ion-item lines="none" color="light" style="margin-bottom:2px;" v-for="(m,key) in potentalDisease" :key="key">
+<ion-item lines="none" color="light" style="margin-bottom:2px;" v-for="(m,key) in potentalDisease" :key="key" button="true" @click="showDiagnosis(m)">
   <ion-label style="text-transform:capitalize;">
   {{ m }}
   </ion-label>
-  <ion-note slot="end">
+  <ion-note slot="end" style="font-size:17px;">
    Diagnise
   </ion-note>
   </ion-item>
@@ -346,45 +346,20 @@ Potential diseases
 
 
 <form  @submit.prevent="submitSckness">
-
 <ion-list>
 <ion-item lines="full">
 <ion-label>
 Please provide additional information about the animal health
 </ion-label>
 </ion-item>
-
 <ion-item lines="full" v-for="(sign,key) in row.listSigns" :key="key">
 <ion-toggle :v-model="key" style="text-transform:capitalize;" :checked="false" @click="setValue(sign.name)" v-model="sickness[sign.name]">
 {{ sign.name }}
 </ion-toggle>
 </ion-item>
-
-<!-- <ion-item lines="full">
-<ion-toggle v-model="sickness.feeding">Defficult feeding</ion-toggle>
-</ion-item>
-
-<ion-item lines="full">
-<ion-toggle v-model="sickness.mouth">Mouth discharge</ion-toggle>
-</ion-item>
-
-<ion-item lines="full">
-<ion-toggle v-model="sickness.nose">Nose discharge</ion-toggle>
-</ion-item>
-
-<ion-item lines="full">
-<ion-toggle v-model="sickness.feet">Feet infection</ion-toggle>
-</ion-item>
-
-<ion-item lines="full">
-<ion-toggle v-model="sickness.weight">Weight loss</ion-toggle>
-</ion-item> -->
-
-
 <ion-item lines="none">
 <ion-button expand="block" style="width:100%;margin-top:20px;" class="ion-button" size="default" type="submit" color="primary" >Save</ion-button>
 </ion-item>
-
 </ion-list>
 </form>
 
@@ -459,52 +434,58 @@ Please provide additional information about the animal health
 
 
 <div>
-<div v-if="row.disease.length>0">
+<div>
 
-<div v-for="(r,key) in row.disease" :key="key">
 
-<ion-item :button="true" detail="false" v-for="(s,key) in r" :key="key" lines="full">
-<div class="unread-indicator-wrapper" slot="start">
-<div class="unread-indicator"></div>
-</div>
+
+
+<div v-if="row.loadContent.length>0">
+<div v-for="(i,key) in row.loadContent" :key="key">
+<ion-item lines="full">
 <ion-label>
-<strong>{{ s.disease.name }}</strong>
-<ion-text></ion-text><br />
-<ion-note color="medium" class="ion-text-wrap">
-<div style="margin-top:10px;">
-<h6 style="font-weight:bold;">
-Symptoms
-</h6>
-
-<div v-for="(sy,key) in s.disease.symptom" :key="key">
-  {{ sy.name }}
-</div>
-</div>
-
-<div style="margin-top:10px;">
-<h6 style="font-weight:bold;">
-Treatment
-</h6>
-
-<div v-for="(t,key) in s.disease.treatment" :key="key">
-{{ t.name }}
-</div>
-</div>
-
-
-
-
-
-</ion-note>
-
-
-
-
+{{ i.name }}
 </ion-label>
 </ion-item>
-</div>
+
+<ion-list-header color="light" style="margin-bottom:2px;">
+<ion-label style="font-weight:bold;">
+Symptoms
+</ion-label>
+</ion-list-header>
+
+<ion-item lines="full" v-for="(s,key) in i.disease_signs" :key="key">
+<ion-label style="text-transform:capitalize;">
+{{ s.name }}
+</ion-label>
+</ion-item>
+
+<ion-item lines="full" v-for="(s1,key) in i.symptom" :key="key">
+<ion-label style="text-transform:capitalize;">
+{{ s1.name }}
+</ion-label>
+</ion-item>
+
+<ion-list-header color="light" style="margin-bottom:2px;">
+<ion-label style="font-weight:bold;">
+Treatment
+</ion-label>
+</ion-list-header>
+<ion-item lines="full" v-for="(t,key) in i.treatment" :key="key">
+<ion-label style="text-transform:capitalize;">
+{{ t.name }}
+</ion-label>
+</ion-item>
+
+
 </div>
 
+
+</div>
+<div v-else>
+
+</div>
+
+</div>
 
 
 
@@ -513,7 +494,7 @@ Treatment
 
 
 <div>
-<h6 style="font-weight:bold;">Reffer to the farm veterinary doctor for treatment</h6>
+<h6 style="font-weight:bold;padding:10px;">Reffer to the farm veterinary doctor for treatment</h6>
 </div>
 
 </div>
@@ -558,7 +539,9 @@ animalHealthState:'',
 sickness:[],
 disease:'',
 listSigns:[],
-observation:[]
+observation:[],
+// nmdjndjnd
+loadContent:[]
 });
 
 
@@ -1069,6 +1052,23 @@ console.log(sign.error);
 console.log(error);
 }
 });
+
+
+const diagnosisContent=[];
+const showDiagnosis = async (name)=>{
+modal2(true);
+const {data,error}=await db.from('disease')
+.select('*,symptom(*),treatment(*),disease_signs(*)')
+.eq('name',name);
+if(error==null){
+row.loadContent=data;
+}else{
+console.log(error)
+}
+
+
+}
+
 
 
 
