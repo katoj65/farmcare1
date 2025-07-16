@@ -187,7 +187,7 @@ Potential diseases
   {{ m }}
   </ion-label>
   <ion-note slot="end" style="font-size:17px;">
-   Diagnise
+   Diagnose
   </ion-note>
   </ion-item>
 
@@ -453,13 +453,13 @@ Symptoms
 </ion-label>
 </ion-list-header>
 
-<ion-item lines="full" v-for="(s,key) in i.disease_signs" :key="key">
+<ion-item lines="none" v-for="(s,key) in i.disease_signs" :key="key">
 <ion-label style="text-transform:capitalize;">
 {{ s.name }}
 </ion-label>
 </ion-item>
 
-<ion-item lines="full" v-for="(s1,key) in i.symptom" :key="key">
+<ion-item lines="none" v-for="(s1,key) in i.symptom" :key="key">
 <ion-label style="text-transform:capitalize;">
 {{ s1.name }}
 </ion-label>
@@ -470,7 +470,7 @@ Symptoms
 Treatment
 </ion-label>
 </ion-list-header>
-<ion-item lines="full" v-for="(t,key) in i.treatment" :key="key">
+<ion-item lines="none" v-for="(t,key) in i.treatment" :key="key">
 <ion-label style="text-transform:capitalize;">
 {{ t.name }}
 </ion-label>
@@ -494,7 +494,7 @@ Treatment
 
 
 <div>
-<h6 style="font-weight:bold;padding:10px;">Reffer to the farm veterinary doctor for treatment</h6>
+<h6 style="font-weight:bold;padding:10px;">Refer to the farm veterinary doctor for treatment</h6>
 </div>
 
 </div>
